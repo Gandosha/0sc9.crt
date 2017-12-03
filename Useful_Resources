@@ -2,4 +2,5 @@ How to prep for the course:
 <Under Construction>
 
 Boolean Blind SQL Injection (example) - https://www.youtube.com/watch?v=4LM_EIehbsU
-Time Based SQL Injection (example) - https://www.youtube.com/watch?v=mphLv1ZCMf8
+Time Based SQL Injection (example) - https://www.youtube.com/watch?v=mphLv1ZCMf8 
+  /*/bWAPP/sqli_5.php?title=The+Dark+Knight+Rises'-if(length(database())%3d'5',sleep(5),1)%23&action=go
