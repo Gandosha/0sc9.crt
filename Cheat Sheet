@@ -1,0 +1,1 @@
+ip -4 addr show scope global    /*Determine interfaces ip address + prefix*/
