@@ -40,10 +40,10 @@ do
 	nmap -sV --script=rdp-vuln-ms12-020 -p 3389 $target
 	echo
         printf "\033[1;35mStarting to scan $target for MySQL vulns...\033[0m\n"
-	echo
 	nmap -sV --script=mysql-empty-password $target
 	nmap -p3306 --script mysql-vuln-cve2012-2122 $target
 	nmap -sV --script mysql-vuln-cve2012-2122 $target
+	echo
 	printf "\033[1;35mStarting to scan $target for HTTP vulns...\033[0m\n"
 	nmap -sV --script http-adobe-coldfusion-apsa1301 $target
 	nmap -p80 --script http-adobe-coldfusion-apsa1301 --script-args basepath=/cf/adminapi/ $target
