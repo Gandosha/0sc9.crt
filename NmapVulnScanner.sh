@@ -1,5 +1,5 @@
 #!/bin/bash
-touch /tmp/Target_IPs /tmp/SMBMachines /tmp/WinMachines
+touch /tmp/Target_IPs
 for i in $(seq 0 254);
 do
 	echo
@@ -9,9 +9,10 @@ do
 	cat /tmp/alive_hosts_in_subnet | grep Up | cut -d" " -f2 >> /tmp/Target_IPs
 done
 echo
-printf "\033[1;33mStarting a scan for vulnerabilities against discovered machines...\033[0m\n"
+printf "\033[1;33mStarting a scan for vulnerabilities in most common protocols against discovered machines...\033[0m\n"
 while read target;
 do
+	echo
 	printf "\033[1;35mStarting to scan $target for SMB vulns...\033[0m\n"
 	nmap --script smb-vuln-conficker.nse -p445 $target
 	nmap --script smb-vuln-cve-2017-7494 -p 445 $target
@@ -23,12 +24,14 @@ do
 	nmap -p445 $target --script=smb-vuln-ms10-054 --script-args unsafe
 	nmap -p445 $target --script=smb-vuln-ms10-061
 	nmap -p445 --script smb-vuln-ms17-010 $target
-	nmap --script smb-vuln-regsvc-dos.nse -p445 $target
+	nmap -O --script smb2-vuln-uptime $target
+	nmap -p445 --script smb2-vuln-uptime --script-args smb2-vuln-uptime.skip-os=true $target
 	echo
 	printf "\033[1;35mStarting to scan $target for FTP vulns...\033[0m\n"
 	nmap -p 21 --script ftp-anon $target
 	nmap -sV --script=ftp-libopie $target
 	nmap -p 21 --script=ftp-syst.nse $target
+	nmap --script ftp-vsftpd-backdoor -p 21 $target
 	nmap --script ftp-proftpd-backdoor -p 21 $target
 	nmap --script ftp-vuln-cve2010-4221 -p 21 $target
 	echo
@@ -100,6 +103,33 @@ do
 	nmap --script=http-config-backup $target
 	nmap -p80 --script http-default-accounts $target
 	nmap -p80 --script http-devframework.nse $target
-done < /tmp/WinMachines
+	nmap -sV --script http-awstatstotals-exec.nse --script-args 'http-awstatstotals-exec.cmd="uname -a", http-awstatstotals-exec.uri=/awstats/index.php' $target
+	nmap -sV --script http-awstatstotals-exec.nse $target
+	nmap -p80,8080 --script http-axis2-dir-traversal --script-args 'http-axis2-dir-traversal.file=../../../../../../../etc/issue' $target
+	nmap -p80 --script http-axis2-dir-traversal $target
+	nmap --script http-barracuda-dir-traversal --script-args http-max-cache-size=5000000 -p 80 $target
+	nmap --script http-vmware-path-vuln -p80,443,8222,8333 $target
+	echo
+        printf "\033[1;35mStarting to scan $target for DNS vulns...\033[0m\n"
+	nmap -sU -p 53 --script=dns-random-srcport $target
+	nmap -sU -p 53 --script=dns-random-txid $target
+	echo
+done < /tmp/Target_IPs
+printf "\033[1;33mStarting a scan for vulnerabilities in other protocols against discovered machines...\033[0m\n"
+while read target2;
+do
+	echo
+	printf "\033[1;35mStarting to scan $target2 for distcc vulns...\033[0m\n"
+	nmap -p 3632 $target2 --script distcc-exec --script-args="distcc-exec.cmd='id'"
+	echo
+	printf "\033[1;35mStarting to scan $target2 for DominoIBM vulns...\033[0m\n"
+	nmap --script domino-enum-users -p 1352 $target2
+	echo
+        printf "\033[1;35mStarting to scan $target2 for ipmi vulns...\033[0m\n"
+	nmap -sU --script ipmi-cipher-zero -p 623 $target2
+	echo
+        printf "\033[1;35mStarting to scan $target2 for ipmi vulns...\033[0m\n"
+	nmap -p 12345 --script netbus-auth-bypass $target2
+done < /tmp/Target_IPs
 printf "\033[1;35mDone!\033[0m\n"
-rm /tmp/WinMachines
+
