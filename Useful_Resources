@@ -5,3 +5,57 @@ How to prep for the course:
 * Time Based SQL Injection (example) - https://www.youtube.com/watch?v=mphLv1ZCMf8 
   /*/bWAPP/sqli_5.php?title=The+Dark+Knight+Rises'-if(length(database())%3d'5',sleep(5),1)%23&action=go  
 * Port Forwarding using iptables - https://www.digitalocean.com/community/tutorials/how-to-forward-ports-through-a-linux-gateway-with-iptables
+
+    Web Scanning
+
+        Web Dir Brute force:
+            DirB - https://tools.kali.org/web-applications/dirb
+            DirBuster - https://tools.kali.org/web-applications/dirbuster
+            GoBuster - https://tools.kali.org/web-applications/gobuster
+
+        Nikto
+        CMS scanning:
+            WPscan - https://tools.kali.org/web-applications/wpscan
+            Joomscan - https://tools.kali.org/web-applications/joomscan
+
+
+
+    Exploiting
+
+        Metasploit - https://www.offensive-security.com/m...oit-unleashed/
+        SQLmap - https://tools.kali.org/vulnerability-analysis/sqlmap
+        Commix - https://tools.kali.org/exploitation-tools/commix
+
+
+
+    Payload Creation
+
+        MSFvenom - https://www.offensive-security.com/m...shed/msfvenom/
+        MSFPC - https://tools.kali.org/exploitation-tools/msfpc
+        veil-evasion
+
+
+
+    Web Shells
+
+        /usr/share/webshells/ - https://tools.kali.org/maintaining-access/webshells
+        Weevely - https://tools.kali.org/maintaining-access/weevely
+
+
+
+    Brute Force
+
+        Hydra - https://tools.kali.org/password-attacks/hydra
+        Ncrack (recommended for "RDP/rDesktop") - https://tools.kali.org/password-attacks/ncrack
+        Patator - https://tools.kali.org/password-attacks/patator
+        Crowbar (recommended for "SSH keys") - https://tools.kali.org/password-attacks/crowbar
+
+
+
+    Wordlists
+
+        CeWL - https://tools.kali.org/password-attacks/cewl
+        rockyou - /usr/share/wordlists/rockyou.txt.gz
+        SecList
+        BetterDefaultPassList
+
