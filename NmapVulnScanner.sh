@@ -1,13 +1,15 @@
 #!/bin/bash
-touch /tmp/Target_IPs
-for i in $(seq 0 254);
-do
-	echo
-	echo
-	printf "\033[1;33mScanning 10.11."$i".0/24 for alive hosts...\033[0m\n"
-	nmap -sn -T4 10.11.$i.0/24 -oG /tmp/alive_hosts_in_subnet
-	cat /tmp/alive_hosts_in_subnet | grep Up | cut -d" " -f2 >> /tmp/Target_IPs
-done
+if [ ! -e /tmp/Target_IPs ]; then
+	touch /tmp/Target_IPs
+	for i in $(seq 0 254);
+	do
+		echo
+		echo
+		printf "\033[1;33mScanning 10.11."$i".0/24 for alive hosts...\033[0m\n"
+		nmap -sn -T4 10.11.$i.0/24 -oG /tmp/alive_hosts_in_subnet
+		cat /tmp/alive_hosts_in_subnet | grep Up | cut -d" " -f2 >> /tmp/Target_IPs
+	done
+fi
 echo
 printf "\033[1;33mStarting a scan for vulnerabilities in most common protocols against discovered machines...\033[0m\n"
 while read target;
