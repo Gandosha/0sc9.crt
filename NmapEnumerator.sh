@@ -15,6 +15,8 @@ while read target;
 do
 	echo
 	printf "\033[1;35mStarting to enumerate $target ...\033[0m\n"
+	nmap --script mrinfo $target
+	nmap -p 23 --script telnet-ntlm-info $target
 	nmap --script smb-enum-domains.nse -p445 $target
 	nmap -sU -sS --script smb-enum-domains.nse -p U:137,T:139 $target
 	nmap --script smb-enum-users.nse -p445 $target
@@ -39,6 +41,18 @@ do
 	nmap -sU -sS --script smb-server-stats.nse -p U:137,T:139 $target
 	nmap --script smb-system-info.nse -p445 $target
 	nmap -sU -sS --script smb-system-info.nse -p U:137,T:139 $target
+	nmap -sU -p 161 --script=snmp-interfaces $target
+	nmap -sU -p 161 --script snmp-ios-config --script-args creds.snmp=:<community> $target
+	nmap -sU -p 161 --script=snmp-netstat $target
+	nmap -sU -p 161 --script=snmp-processes $target
+	nmap -sU -p 161 --script snmp-sysdescr $target	
+	nmap -sU -p 161 --script=snmp-win32-services $target
+	nmap -sU -p 161 --script=snmp-win32-shares $target
+	nmap -sU -p 161 --script=snmp-win32-software $target
+	nmap -sU -p 161 --script=snmp-win32-users $target
+	nmap -p 1080 $target --script socks-auth-info
+	nmap --script snmp-info.nse -p 161 $target
+	nmap -p 22 --script ssh-auth-methods --script-args="ssh.user=admin" $target
 	nmap -p 110,995 --script pop3-ntlm-info $target
 	nmap --script=mysql-enum -p 3306 $target
 	nmap $target --script=msrpc-enum -p 445
@@ -53,8 +67,38 @@ do
 	nmap -p 80 --script http-ntlm-info --script-args http-ntlm-info.root=/root/ $target
 	nmap -p80 $target --script http-gitweb-projects-enum
 	nmap -sV --script=http-enum $target
-	nmap --script=http-drupal-enum-users --script-args http-drupal-enum-users.root="/path/" $targets
+	nmap --script=http-drupal-enum-users --script-args http-drupal-enum-users.root="/path/" $target
 	nmap -p 80 --script http-drupal-enum $target
+	nmap -sV --script http-apache-server-status $target
+	nmap -p80 --script http-apache-server-status $target
+	nmap -p 80 --script http-bigip-cookie $target
+	nmap -p 443 --script http-cisco-anyconnect $target
+	nmap --script http-qnap-nas-info -p 443 $target
+	nmap --script mysql-info.nse -p 3306 $target
+	nmap -p 445 --script ms-sql-info $target
+	nmap -p 1433 --script ms-sql-info --script-args mssql.instance-port=1433 $target
+	nmap -p 111 --script=nfs-ls $target
+	nmap -sV --script=nfs-ls $target
+	nmap --script mrinfo $target
+	nmap -p 8140 --script puppet-naivesigning $target
+	nmap -p 8140 --script puppet-naivesigning --script-args puppet-naivesigning.csr=other.csr,puppet-naivesigning.node=agency $target
+	nmap -p80 --script trane-info.nse $target
+	nmap -p 1344 $target --script icap-info
+	nmap -sU --script ipmi-version -p 623 $target
+	nmap -p 3205 $target --script isns-info
+	nmap -sT $target -p 2010 --script=+jdwp-info
+	nmap -sU -p 9100 --script=lexmark-config $target
+	nmap -p 7210 --script maxdb-info $target
+	nmap -p 119,433,563 --script nntp-ntlm-info $target
+	nmap -sU -p 123 --script ntp-info $target
+	nmap -sU -pU:123 -Pn -n --script=ntp-monlist $target
+	nmap --script openwebnet-discovery $target
+	nmap -p 8091 $target --script membase-http-info
+	nmap -p 11211 --script memcached-info $target
+	nmap --script modbus-discover.nse --script-args='modbus-discover.aggressive=true' -p 502 $target
+	nmap -p 27017 --script mongodb-info $target
+	nmap -p 1433 --script ms-sql-ntlm-info $target
+	nmap -sU -p 500 --script ike-version $target
 	nmap -p 143,993 --script imap-ntlm-info $target
 	nmap -p 119,433,563 --script nntp-ntlm-info $target
 	nmap -sU --script=citrix-enum-apps -p 1604 $target
@@ -66,6 +110,9 @@ do
 	nmap --script modbus-discover.nse --script-args='modbus-discover.aggressive=true' -p 502 $target
 	nmap $target --script ncp-serverinfo -p 524
 	nmap -sV -p 524 --script=ncp-enum-users $target
+	nmap -sS -sV -p 548 --script=afp-ls $target
+	nmap --script afp-serverinfo.nse -p 548 $target
+	nmap --script backorifice-info $target --script-args backorifice-info.password=/usr/share/wordlists/rockyou.txt
 	nmap -p 119,433,563 --script nntp-ntlm-info $target
 	nmap --script nrpe-enum -p 5666 $target
 	nmap -p 9390 --script omp2-brute,omp2-enum-targets $target
@@ -75,6 +122,43 @@ do
 	nmap --script s7-info.nse -p 102 $target
 	nmap --script=sip-enum-users -sU -p 5060 $target
 	nmap --script=sip-enum-users -sU -p 5060 $target --script-args 'sip-enum-users.padding=4, sip-enum-users.minext=1000, sip-enum-users.maxext=9999'
+	nmap -sV -PN -sU -p 3478 --script stun-info $target
+	nmap -p 10000 --script ndmp-fs-info $target
+	nmap -p 12345 --script netbus-info $target --script-args netbus-info.password=/usr/share/wordlists/rockyou.txt
+	nmap -sU -p 69 --script tftp-enum.nse --script-args tftp-enum.filelist=/usr/share/wordlists/rockyou.txt  $target
+	nmap --script tn3270-info,tn3270_screen $target
+	nmap --script vtam-enum -p 23 $target
+	nmap --script bacnet-info -sU -p 47808 $target
+	nmap --script=broadcast-dropbox-listener $target
+	nmap --script=broadcast-dropbox-listener --script-args=newtargets -Pn $target
+	nmap --script=broadcast-eigrp-discovery $target
+	nmap -sV --script=broadcast-upnp-info $target
+	nmap -p 9160 $target --script=cassandra-info
+	nmap --script=cics-info -p 23 $target
+	nmap -p 631 $target --script cups-info
+	nmap -sU -p 8611,8612 --script bjnp-discover $target
+	nmap -p 631 $target --script cups-queue-info
+	nmap --script db2-das-info.nse -p 523 $target
+	nmap -sU -p 67 --script=dhcp-discover $target
+	nmap -p 2628 $target --script dict-info
+	nmap --script drda-info.nse -p 50000 $target
+	nmap -PN -p445,443 --script duplicates,nbstat,ssl-cert $target
+	nmap --script flume-master-info -p 35871 $target
+	nmap --script fox-info.nse -p 1911 $target
+	nmap --script ganglia-info --script-args ganglia-info.timeout=60,ganglia-info.bytes=1000000 -p 8649 $target
+	nmap -p 19150 $target --script gkrellm-info
+	nmap -p 70 --script gopher-ls --script-args gopher-ls.maxfiles=100 $target
+	nmap -p 2947 $target --script gpsd-info
+	nmap --script hadoop-datanode-info.nse -p 50075 $target
+	nmap --script hadoop-jobtracker-info -p 50030 $target
+	nmap --script hadoop-namenode-info -p 50070 $target
+	nmap --script hadoop-secondary-namenode-info -p 50090 $target
+	nmap --script hadoop-tasktracker-info -p 50060 $target
+	nmap --script hbase-master-info -p 60010 $target
+	nmap --script hnap-info -p80,8080 $target
+	nmap -p80 --script http-apache-server-status $target
+
+
 	echo
 done < /tmp/Target_IPs
 echo
