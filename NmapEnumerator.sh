@@ -23,7 +23,6 @@ do
 	nmap -sU -sS --script smb-enum-users.nse -p U:137,T:139 $target
 	nmap --script smb-enum-processes.nse -p445 $target
 	nmap -sU -sS --script smb-enum-processes.nse -p U:137,T:139 $target
-	nmap --script smb-enum-services.nse -p445 $target
 	nmap --script smb-enum-sessions.nse -p445 $target
 	nmap -sU -sS --script smb-enum-sessions.nse -p U:137,T:139 $target
 	nmap --script smb-enum-shares.nse -p445 $target
@@ -42,7 +41,6 @@ do
 	nmap --script smb-system-info.nse -p445 $target
 	nmap -sU -sS --script smb-system-info.nse -p U:137,T:139 $target
 	nmap -sU -p 161 --script=snmp-interfaces $target
-	nmap -sU -p 161 --script snmp-ios-config --script-args creds.snmp=:<community> $target
 	nmap -sU -p 161 --script=snmp-netstat $target
 	nmap -sU -p 161 --script=snmp-processes $target
 	nmap -sU -p 161 --script snmp-sysdescr $target	
@@ -71,7 +69,6 @@ do
 	nmap -p 80 --script http-drupal-enum $target
 	nmap -sV --script http-apache-server-status $target
 	nmap -p80 --script http-apache-server-status $target
-	nmap -p 80 --script http-bigip-cookie $target
 	nmap -p 443 --script http-cisco-anyconnect $target
 	nmap --script http-qnap-nas-info -p 443 $target
 	nmap --script mysql-info.nse -p 3306 $target
@@ -84,7 +81,6 @@ do
 	nmap -p 5019 $target --script versant-info
 	nmap -p 8140 --script puppet-naivesigning $target
 	nmap -p 8140 --script puppet-naivesigning --script-args puppet-naivesigning.csr=other.csr,puppet-naivesigning.node=agency $target
-	nmap -p80 --script trane-info.nse $target
 	nmap -p 1344 $target --script icap-info
 	nmap -p 5019 $target --script versant-info
 	nmap -sU --script ipmi-version -p 623 $target
@@ -134,7 +130,7 @@ do
 	nmap -p 10000 --script ndmp-fs-info $target
 	nmap -p 12345 --script netbus-info $target --script-args netbus-info.password=/usr/share/wordlists/rockyou.txt
 	nmap -sU -p 69 --script tftp-enum.nse --script-args tftp-enum.filelist=/usr/share/wordlists/rockyou.txt $target
-	nmap --script tn3270-info,tn3270_screen $target
+	nmap --script tn3270-info,tn3270-screen.nse $target
 	nmap --script vtam-enum -p 23 $target
 	nmap --script bacnet-info -sU -p 47808 $target
 	nmap --script=broadcast-dropbox-listener $target
