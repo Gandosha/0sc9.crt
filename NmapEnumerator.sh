@@ -15,7 +15,7 @@ while read target;
 do
 	echo
 	printf "\033[1;35mStarting to enumerate $target ...\033[0m\n"
-	nmap --script mrinfo $target
+	nmap --script smtp-enum-users.nse --script-args smtp-enum-users.methods=EXPN,VRFY,RCPT -p 25,465,587 $target
 	nmap -p 23 --script telnet-ntlm-info $target
 	nmap --script smb-enum-domains.nse -p445 $target
 	nmap -sU -sS --script smb-enum-domains.nse -p U:137,T:139 $target
@@ -79,11 +79,14 @@ do
 	nmap -p 1433 --script ms-sql-info --script-args mssql.instance-port=1433 $target
 	nmap -p 111 --script=nfs-ls $target
 	nmap -sV --script=nfs-ls $target
-	nmap --script mrinfo $target
+	nmap --script vnc-info.nse -p 5900 $target
+	nmap --script vmware-version -p443 $target
+	nmap -p 5019 $target --script versant-info
 	nmap -p 8140 --script puppet-naivesigning $target
 	nmap -p 8140 --script puppet-naivesigning --script-args puppet-naivesigning.csr=other.csr,puppet-naivesigning.node=agency $target
 	nmap -p80 --script trane-info.nse $target
 	nmap -p 1344 $target --script icap-info
+	nmap -p 5019 $target --script versant-info
 	nmap -sU --script ipmi-version -p 623 $target
 	nmap -p 3205 $target --script isns-info
 	nmap -sT $target -p 2010 --script=+jdwp-info
@@ -98,6 +101,10 @@ do
 	nmap --script modbus-discover.nse --script-args='modbus-discover.aggressive=true' -p 502 $target
 	nmap -p 27017 --script mongodb-info $target
 	nmap -p 1433 --script ms-sql-ntlm-info $target
+	nmap -p 6379 $target --script redis-info
+	nmap -p 8098 $target --script riak-http-info
+	nmap -p 2002 $target --script rpcap-info
+	nmap -p 111 --script rpcinfo.nse $target
 	nmap -sU -p 500 --script ike-version $target
 	nmap -p 143,993 --script imap-ntlm-info $target
 	nmap -p 119,433,563 --script nntp-ntlm-info $target
@@ -120,12 +127,13 @@ do
 	nmap --script oracle-enum-users --script-args oracle-enum-users.sid=ORCL,userdb=orausers.txt -p 1521-1560 $target
 	nmap --script rtsp-url-brute -p 554 $target
 	nmap --script s7-info.nse -p 102 $target
+	nmap -sU -p 6481 --script=servicetags $target
 	nmap --script=sip-enum-users -sU -p 5060 $target
 	nmap --script=sip-enum-users -sU -p 5060 $target --script-args 'sip-enum-users.padding=4, sip-enum-users.minext=1000, sip-enum-users.maxext=9999'
 	nmap -sV -PN -sU -p 3478 --script stun-info $target
 	nmap -p 10000 --script ndmp-fs-info $target
 	nmap -p 12345 --script netbus-info $target --script-args netbus-info.password=/usr/share/wordlists/rockyou.txt
-	nmap -sU -p 69 --script tftp-enum.nse --script-args tftp-enum.filelist=/usr/share/wordlists/rockyou.txt  $target
+	nmap -sU -p 69 --script tftp-enum.nse --script-args tftp-enum.filelist=/usr/share/wordlists/rockyou.txt $target
 	nmap --script tn3270-info,tn3270_screen $target
 	nmap --script vtam-enum -p 23 $target
 	nmap --script bacnet-info -sU -p 47808 $target
@@ -136,6 +144,7 @@ do
 	nmap -p 9160 $target --script=cassandra-info
 	nmap --script=cics-info -p 23 $target
 	nmap -p 631 $target --script cups-info
+	nmap -sV --script=smtp-strangeport $target
 	nmap -sU -p 8611,8612 --script bjnp-discover $target
 	nmap -p 631 $target --script cups-queue-info
 	nmap --script db2-das-info.nse -p 523 $target
@@ -155,10 +164,11 @@ do
 	nmap --script hadoop-secondary-namenode-info -p 50090 $target
 	nmap --script hadoop-tasktracker-info -p 50060 $target
 	nmap --script hbase-master-info -p 60010 $target
+	nmap -sU -p 17185 --script wdb-version $target
 	nmap --script hnap-info -p80,8080 $target
 	nmap -p80 --script http-apache-server-status $target
-
-
+	nmap --script ssl-cert.nse $target
+	nmap -p 443 --script ssl-cert-intaddr $target
 	echo
 done < /tmp/Target_IPs
 echo
@@ -170,8 +180,12 @@ read userpath
 read passwordpath
 printf "\033[1;35mIn order to invoke oracle-enum-users script, please provide an oracle users list.\033[0m\n"
 read oracleuserlist
+printf "\033[1;33mWhat is the domain name you are about to scan?\033[0m\n"
+read domain
 while read target2;
 do
+	nmap --script smtp-commands.nse --script-args smtp-commands.domain=$domain -pT:25,465,587 $target2
+	nmap -p 25,465,587 --script smtp-ntlm-info --script-args smtp-ntlm-info.domain=$domain $target2
 	nmap -p 88 --script krb5-enum-users --script-args krb5-enum-users.realm='$realm' $target2
 	nmap --script http-domino-enum-passwords -p 80 $target2 --script-args http-domino-enum-passwords.username=$userpath,http-domino-enum-passwords.password=$passwordpath
 	nmap --script oracle-enum-users --script-args oracle-enum-users.sid=ORCL,userdb=$oracleuserlist -p 1521-1560 $target2
