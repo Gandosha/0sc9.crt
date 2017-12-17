@@ -1,5 +1,3 @@
-//Credit to Offensive Security for this POC
-
 import java.applet.*;
 import java.awt.*
 import java.io.*;
