@@ -81,7 +81,7 @@ do
 	nmap -p80 --script http-vuln-cve2012-1823 --script-args http-vuln-cve2012-1823.uri=/test.php $target
 	nmap -sV --script http-vuln-cve2013-0156 $target
 	nmap -sV --script http-vuln-cve2013-0156 --script-args uri="/test/" $target
-	nmap -sV http-vuln-cve2013-6786 $target
+	nmap -p 80 http-vuln-cve2013-6786 $target
 	nmap -sV --script http-vuln-cve2013-7091 $target
 	nmap -p80 --script http-vuln-cve2013-7091 --script-args http-vuln-cve2013-7091=/ZimBra $target
 	nmap -p 443 --script http-vuln-cve2014-2126 $target
