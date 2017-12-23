@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt-get update && apt-get install -y pure-ftpd-common pure-ftpd nmap
+apt-get update && apt-get install -y pure-ftpd-common pure-ftpd
 ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/50pure
 echo no > /etc/pure-ftpd/conf/PAMAuthentication
 echo no > /etc/pure-ftpd/conf/UnixAuthentication
