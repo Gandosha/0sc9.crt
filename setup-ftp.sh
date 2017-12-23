@@ -1,11 +1,17 @@
 #!/bin/bash
 
-groupadd ftpgroup
-useradd -g ftpgroup -d /dev/null -s /etc ftpuser
-pure-pw useradd <user> -u ftpuser -d /ftphome
+apt-get update && apt-get install -y pure-ftpd-common pure-ftpd nmap
+ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/50pure
+echo no > /etc/pure-ftpd/conf/PAMAuthentication
+echo no > /etc/pure-ftpd/conf/UnixAuthentication
+echo "yes" > /etc/pure-ftpd/conf/CreateHomeDir
+echo "no" > /etc/pure-ftpd/conf/CreateHomeDir
+echo "yes" > /etc/pure-ftpd/conf/ChrootEveryone
+groupadd ftpusr
+useradd -g ftpusr -d /dev/null -s /etc ftpusr
+mkdir /FTPhome
+pure-pw useradd offsec -u ftpusr -g ftpusr -d ~/FTPhome
 pure-pw mkdb
-cd /etc/pure-ftpd/auth
-ln -s ../conf/pureDB 60pdb
-mkdir -p /ftphome
-chown -R ftpuser:ftpgroup /ftphome/
-/etc/init.d/pure-ftpd restart
+pure-pw show offsec
+
+
