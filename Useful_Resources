@@ -1,5 +1,268 @@
 How to prep for the course:
-<Under Construction>
+http://niiconsulting.com/checkmate/2017/06/a-detail-guide-on-oscp-preparation-from-newbie-to-oscp/
+*By Ramkisan Mohan*
+
+Overview
+
+OSCP preparation, lab, and the exam is an awesome journey where you will experience lots of excitement, pain, suffering, frustration, confidence, and motivation where learning will be constant throughout the journey. The OSCP certification will be awarded on successfully cracking 5 machines in 23.45 hours. Where one machine will be for exploit writing and which holds maximum points, while the others will be for enumeration, exploitation, and post-exploitation. To practice various attacks and approaches, you will be given access to an online lab which has 55 machines of different versions of both Windows and Linux. Once you are confident in your pentest skills after practicing in labs, you can take the exam.
+Things Required for OSCP Preparation
+
+    A ‘NEVER GIVE UP’ attitude
+    Basic Linux usage skills
+    A bit of programming knowledge
+    Ability to read and understand the flow of public exploits
+    Creative hacker way of thinking
+    Lots of interest, patience, and enthusiasm
+
+We will divide the OSCP journey into 2 phases:
+
+    Pre-Enrolment
+    Post Enrolment
+
+Pre-Enrolment
+
+If you are not a newbie in Pen testing and aware of buffer overflow exploitation, you can skip this section and start enrolling.
+
+For the rest, you need to cover the following aspects:
+Basics
+
+1. Get handy in using Linux. If you are new to Linux, refer the Linux command guide http://linuxcommand.org. Practice all the common commands, and refer the man page for each of these commands.
+
+Pro-tip: If you have more time in your hands and want to Learn Linux in a fun way, you can try the wargames here http://overthewire.org/wargames/
+
+2. If you are not aware of programming languages, it is highly recommended to learn one. I would recommend learning Python. An awesome simple tutorial by Vivek Ramachandran is preferable http://www.pentesteracademy.com/course?id=1
+
+3. Check out various videos on YouTube on basic concepts such as port-scanning, web application testing, etc. Sometimes research on simple concepts will give good ideas on enumeration, for e.g., How SSH works, How service runs on ports, How Sockets works etc.
+
+Metasploit
+
+Metasploit is a very powerful tool and it is necessary for all the pen testers to know how to use it. Especially the Metasploit post-exploitation modules. Refer to the following links:
+
+Vivek Ramachandran’s Metasploit Megaprimer Videos: http://www.securitytube.net/groups?operation=view&groupId=10
+
+Metasploit unleashed by Offensive Security:
+
+https://www.offensive-security.com/metasploit-unleashed/
+
+Usage of Metasploit in the exam is limited to only one machine, but still, you can practice it in labs to know about the tool in depth.
+
+Buffer Overflow
+
+Buffer overflow is a very important concept you should practice. Because, if you are good at exploiting buffer overflows, you are sure to get the maximum point machine in the practical exam. But don’t worry if you know nothing about buffer overflows. The following steps will make you not only understand the concept of a buffer overflow, but you can also do it by yourself.
+
+1. A quick intro on buffer overflow.
+
+https://www.youtube.com/watch?v=1S0aBV-Waeo
+
+What is Buffer Overflow?  (very clearly explained). After watching this video, you will get an idea on the concept behind buffer overflow. Also, will increase your urge on learning buffer overflow.
+
+2. Assembly language primer by Vivek Ramachandran. http://www.securitytube.net/groups?operation=view&groupId=5
+
+Don’t get bored after seeing Assembly language. Just go through the first 2 videos in this video series. That is enough for understanding the memory layout.
+
+3. Buffer Overflow Megaprimer by Vivek Ramachandran. http://www.securitytube.net/groups?operation=view&groupId=4.
+
+In-depth video of buffer overflow where its explained in a very detailed way.
+
+4. Exploit Research Megaprimer by Vivek Ramachandran. http://www.securitytube.net/groups?operation=view&groupId=7
+
+Real-time Exploitation of buffer overflow which will be very interesting, where exploitation is explained in stepwise clearly. You can even try it yourself as mentioned in the video for your practice. It’s enough to go through first 5 videos. SEH Based buffer overflow is not required for OSCP.
+
+If you follow the above steps, you will be able to do exploitation with buffer overflow by yourself 100%.
+
+Many people shy away from preparing for buffer overflows because it helps to exploit only one machine in the exam. But still, it’s a very important and interesting concept. I have seen many people failing because of improper preparation on buffer overflows. Moreover, OSCP is not the target. All the things you learn here is for the real world.
+
+Some Valuable Resources           
+
+These are some valuable resources which I found very useful in my OSCP Preparation. Many of them are now permanent reference resources even after I have cleared my OSCP.
+
+Enumeration
+
+http://www.0daysecurity.com/penetration-testing/enumeration.html
+
+https://nmap.org/nsedoc/
+
+https://www.youtube.com/watch?v=Hk-21p2m8YY
+
+Shell Exploitation
+
+http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+
+http://www.lanmaster53.com/2011/05/7-linux-shells-using-built-in-tools/          
+
+https://netsec.ws/?p=331
+
+Windows Privilege Escalation
+
+http://www.fuzzysecurity.com/tutorials/16.html
+
+https://www.youtube.com/watch?v=kMG8IsCohHA
+
+https://www.youtube.com/watch?v=PC_iMqiuIRQ
+
+https://github.com/GDSSecurity/Windows-Exploit-Suggester     
+
+Linux Privilege Escalation
+
+https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+
+https://www.youtube.com/watch?v=dk2wsyFiosg
+
+Privilege escalation recon scripts:
+
+http://www.securitysift.com/download/linuxprivchecker.py
+
+http://pentestmonkey.net/tools/audit/unix-privesc-check
+
+Research and document
+
+OSCP is difficult – have no doubts about that! There is no spoon-feeding here. Refer to all the above references and do your own research on topics like service enumeration, penetration testing approaches, post exploitation, privilege escalation, etc. Remember, always take notes as text with a separate note.
+
+POST ENROLLING
+
+Knowledge and expert skills don’t come immediately to anyone. They must be worked upon. But first you need to get started! So, if you are anywhere near the idea of attempting the OSCP, just enrol and get started. Once you are good with all the above pre-enrolling, you are fully ready to enrol for the OSCP.
+
+The main thing in OSCP is the lab.
+
+OSCP is not about clearing the exam. It’s all about working deeply on labs.
+
+In General,
+
+It’s not about the destination. It’s all about the journey.
+
+So, it is recommended to take 2 or 3 months lab. 1 month lab will never be enough for learning. If you have enough time to work dedicatedly on weekdays, you can take 2 months. Else take 3 months minimum.
+
+Once you enrol, you will be given a time where you will receive your materials and lab connectivity packs. Approximately 20 days from the date of enrolling.
+
+Period before getting Lab Connections
+
+This period could be used to test your research ideas on some other OSCP lab similar stuffs.
+
+Refer to the vulnhub machines in the following link.
+
+http://www.abatchy.com/2017/02/oscp-like-vulnhub-vms.html
+
+The VMs in the above link are OSCP-like VMs. Generally, CTFs are different than the vulnerable machines in the OSCP labs. CTFs have a puzzle-like approach, whereas OSCP labs are the ones which will be like a real-world simulation.
+
+The VMs in the above link will be like OSCP labs. You can start solving these VMs. For the vulnhub VMs, there are walkthroughs for each machine. You can try each machine first by yourself. Else read the walkthrough, understand it, and then try to implement the method again in the VMs.
+
+Also, try this https://www.hackthebox.gr/
+
+It is also a network which has machines like OSCP Labs.
+
+Document all your steps and take notes of every new concept you learned.
+
+Welcome to OSCP
+
+You will get your training materials (in PDF), video materials, and lab connectivity pack via email. The link for the pdf and video will expire in 2 days. You should download and back it up before that. Check your lab connectivity as mentioned in the lab connectivity guide. Don’t start diving into labs immediately. Follow the below given steps once you receive the email.
+
+    Go through the video material
+    Go through the pdf completely
+    Do the exercises in pdf and document it.
+
+Mostly people only go through the video and then start labs. But that is the biggest mistake. The PDF has a lot more than what is mentioned in the videos. Do not feel bored when going through all the material and doing the exercises. Remember the proverb by Abraham Lincoln.
+
+OSCP
+
+The exercises in the PDF help in sharpening one’s axe. I found some useful tips and tricks whenever I used to get stuck in the lab exercises.
+
+What’s more, you will get an additional 5 points for submitting exercise documentation.
+
+Let the Hacking Begin
+
+Now is the main part of OSCP. The labs. The lab environment consists of 55 machines each with a different approach and different difficulty level. The lab infra has 4 networks. Public, IT, Development, and Admin network. You will get direct access only to the public network. You need to unlock other networks by the secret keys obtained by proper post exploitation. You will be connected to other networks by port forwarding and proxy chaining. A lab is the place where you try out all your research ideas and various tools.
+
+Before starting the lab machines, go through the buffer overflow exploitation in the video material 2-3 times and practice the same on your dedicated Windows 7 machine provided along with the lab machines. Same tools explained in the material will be there on your Windows 7 machine. Practice buffer overflow by following the same steps used by the instructor.
+
+Exploiting a machine is a Systematic Process:
+
+    Find the open ports and services running on ports
+    Enumerate the services and the machine
+    Exploit the correct vulnerability and gain access
+    Do proper post exploitation enumeration
+    Privilege Escalation
+
+For some machines, you will get direct admin/root/system access at the initial stage itself. But still, you need to do proper post exploitation enumeration on that machine. This is because in the labs the information gathered on post exploitation on one machine will be used to solve another one.
+
+There are 4 main difficult machines in the OSCP lab called as pain, sufferance, humble and gh0st. its nature is as per the name. I gained a lot of confidence after solving these machines.
+
+You need to give your maximum dedication in the labs. Do the research, lots and lots of research. Try all kind of possibilities, try stupid things. Google is your friend. Always use Google at any point and at every machine. Google everything that is in front of you. You will experience lots and lots of pain, frustration, etc. Many times you may lose your patience. But NEVER GIVE UP!
+
+Try Harder. If you get stuck and you don’t know how to proceed, you can visit offsec student forums
+
+https://forums.offensive-security.com/
+
+Log into you OS ID and navigate to lab machine discussion. You will find some useful hints.
+
+Also, you can join a slack team https://netsecfocus.slack.com and request them to add you to the OSCP channel. You can get some useful ideas here.
+
+But nowhere no one will give you a direct solution for any of the lab machines. You will only get a small hint and some suggestions. You must figure out the solution by yourself.
+
+Remember, the enumeration is the key for OSCP. It took me 2 months to know the exact meaning of enumeration. Never get excited to exploit any machine at first. Do not follow the approach of monkey testing and blindly downloading and running the exploits. Trust me, this approach will make you fall into a rabbit hole. There will be some decoy vulnerabilities to trick you in the wrong direction.
+
+So, what is the approach?
+
+Only with proper enumeration, you can successfully exploit any target.
+
+1. Do a full port scan on the target.
+
+Refer fyodor’s defcon video on “nmap: scanning the internet” https://www.youtube.com/watch?v=Hk-21p2m8YY
+
+2. Enumerate every port. Find what service is running. If you are unaware, simply google the port. Also refer to the below article.
+
+http://www.0daysecurity.com/penetration-testing/enumeration.html
+
+3. After understanding the target, now try to find vulnerabilities. Some target might be exploitable with more than 1 way
+
+If you find a vulnerability, read about that vulnerability. Many of the exploits will not work without modification. So, learn the vulnerability and read the exploit carefully. Sometimes, there will be another manual way of exploiting the vulnerabilities instead of using public exploits. So, google a lot. Pages not listed under top will also have some useful stuffs. Refer all pages.
+
+In some cases, the machine might be busy since other students will also be working. So, revert the machine and try again. Look for the attacks on the vulnerability online. There will be many blogs written on how to exploit that vulnerability.
+
+Once you gain access to the system, always upgrade your shell. Enumerate well. Search for misconfigurations, credentials, try to use the credentials at whichever place possible.
+
+It is not required to solve all the machines to take the exam. It’s for enhancing your pentest skills. I’d recommend getting at least 25+ targets and 2 of the four difficult ones. If you can’t solve these many target machines then you probably need to extend the labs and start working on it.
+
+Document all your lab works and take notes of everything that you learned. Submitting the lab report will give you an additional 5 points.
+
+The Exam
+
+Once you are confident enough after working in the labs, you can take the exam. Make sure you schedule your exam date at least 1 month in advance.
+
+In the exam, you will be given 5 machines. You have 23.45 hours to crack all the given machines. Each machine carries marks. You require minimum of 70 marks to pass the exam in the given period. You will be given additional 1 day for preparing the report.
+
+You need proper sleep, food, and regular breaks during the exam. Because your brain needs to function 2-3 times more creatively and spontaneously than usual.
+
+Grab all your notes, lab notes and make a revision before starting.
+
+Metasploit usage is restricted in the exam. You should use it only once. So, use it wisely.
+
+Start with the exploit writing (Buffer Overflow) machine. It holds one of the maximum marks. If you have proper practice on this before the lab, you can finish this within maximum 2 hours.
+
+Next, focus on the machine which has minimum marks. You require some proper enumeration here.
+
+The real exam starts with the remaining 3 machines. Never lose your patience and stay calm. Enumerate, enumerate, and enumerate. Never leave anything. Try all stupid things. Do not panic. Assume like you are working in the lab.
+
+After completing the exam, you will be given 1 day to prepare the report and send them. There will be a report template in the reporting guide. You can use your own report as well. Read the offsec reporting guide carefully before starting the report and send them in the exact format and the way they are mentioned.
+
+Tips for Exam
+
+    Be confident
+    Be very cool and calm
+    Never bother if you didn’t get access to one or two machines in short time as mentioned in other blogs
+    Enumerate well
+    Take regular breaks. Go for a small walk and get some fresh air.
+    Take screenshots and POCs immediately after each exploitation steps.
+    Submit the flags (local.txt & proof.txt) in the exam panel immediately once you retrieve them
+
+I have seen many people failing in the exam once they lose their patience. So never get tensed. Always be calm and relaxed. TRY HARDER!
+
+Conclusion
+
+OSCP is not just a certification. It is an awesome journey which teaches you many things apart from technical perspective. It will teach you to think creatively, develop a ton of patience and most of all you will ‘NEVER GIVE UP’.
+
+So never see this as a certification and don’t target only on clearing the exam and getting certification. Work on labs. Try to pwn as many machines as you can. Again, TRY HAAAAARDER.
+
+ALL THE BEST!
 
 * Boolean Blind SQL Injection (example) - https://www.youtube.com/watch?v=4LM_EIehbsU
 * Time Based SQL Injection (example) - https://www.youtube.com/watch?v=mphLv1ZCMf8 
