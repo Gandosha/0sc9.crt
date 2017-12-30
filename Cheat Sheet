@@ -14,7 +14,13 @@ msf>exploit -j
 
 The -j option is to keep all the connected session in the background.
 ----------------------------------------------------------------------------
-Post - privs escalation
+*********** Post - privs escalation ***********
+
+* Accesschk stuff
+accesschk.exe /accepteula (first thing to do in CLI access)
+accesschk.exe -ucqv [service_name]
+accesschk.exe -uwcqv "Authenticated Users" * (won't yield anything on Win 8)
+accesschk.exe -ucqv [service_name]
 
 reg query HKEY_LOCAL_MACHINE\System\CurrentControlSet\services\ /s
 
