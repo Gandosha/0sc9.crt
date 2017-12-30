@@ -18,7 +18,6 @@ The -j option is to keep all the connected session in the background.
 
 * Accesschk stuff
 accesschk.exe /accepteula (first thing to do in CLI access)
-accesschk.exe /accepteula -ucqv [service_name]
 accesschk.exe /accepteula -uwcqv "Authenticated Users" * (won't yield anything on Win 8)
 accesschk.exe /accepteula -ucqv [service_name]
 
