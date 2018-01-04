@@ -14,6 +14,9 @@ echo
 while read target;
 do
 	echo
+	printf "\033[1;35mEnumerating for NULL sessions $target ...\033[0m\n"
+	crackmapexec smb $target -u '' -p ''
+	echo
 	printf "\033[1;35mStarting to enumerate $target ...\033[0m\n"
 	nmap --script smtp-enum-users.nse --script-args smtp-enum-users.methods=EXPN,VRFY,RCPT -p 25,465,587 $target
 	nmap -p 23 --script telnet-ntlm-info $target
