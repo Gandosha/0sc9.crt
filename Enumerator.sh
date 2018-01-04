@@ -14,10 +14,19 @@ echo
 while read target;
 do
 	echo
+        printf "\033[1;35mOpen ports in $target are:\033[0m\n"
+	nmap -sS -sV -p- -T4 $target --open
+	echo
 	printf "\033[1;35mEnumerating for NULL sessions $target ...\033[0m\n"
 	crackmapexec smb $target -u '' -p ''
 	echo
-	printf "\033[1;35mStarting to enumerate $target ...\033[0m\n"
+	printf "\033[1;35mStarting to enumerate $target using NBTSCAN...\033[0m\n"
+	nbtscan -r $target
+	echo
+        printf "\033[1;35mStarting to enumerate $target using enum4linux...\033[0m\n"
+	enum4linux -a $target
+	echo
+	printf "\033[1;35mStarting to enumerate $target using Nmap's NSE...\033[0m\n"
 	nmap --script smtp-enum-users.nse --script-args smtp-enum-users.methods=EXPN,VRFY,RCPT -p 25,465,587 $target
 	nmap -p 23 --script telnet-ntlm-info $target
 	nmap --script smb-enum-domains.nse -p445 $target
@@ -43,6 +52,7 @@ do
 	nmap -sU -sS --script smb-server-stats.nse -p U:137,T:139 $target
 	nmap --script smb-system-info.nse -p445 $target
 	nmap -sU -sS --script smb-system-info.nse -p U:137,T:139 $target
+	nmap -sU --script snmp-brute $target --script-args snmp-brute.communitiesdb=/usr/share/seclists/Miscellaneous/wordlist-common-snmp-community-strings.txt
 	nmap -sU -p 161 --script=snmp-interfaces $target
 	nmap -sU -p 161 --script=snmp-netstat $target
 	nmap -sU -p 161 --script=snmp-processes $target
