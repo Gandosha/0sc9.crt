@@ -18,7 +18,7 @@ do
 	nmap -sS -sV -p- -T4 $target --open
 	echo
 	printf "\033[1;35mEnumerating for NULL sessions $target ...\033[0m\n"
-	crackmapexec smb $target -u '' -p ''
+	crackmapexec smb $target -u '' -p '' --server http --shares --sessions --users --lusers --spider --content --verbose
 	echo
 	printf "\033[1;35mStarting to enumerate $target using NBTSCAN...\033[0m\n"
 	nbtscan -r $target
