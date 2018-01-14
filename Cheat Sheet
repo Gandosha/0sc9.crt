@@ -1,6 +1,7 @@
 1) nmap all ports
-2) Check for null sessions using cme (if yes - run enum4linux on target)
-3) run NSE scripts (NmapVuln & Enumerator) on those ports
+2) Web ports are open? Nikto them.
+3) Check for null sessions using cme (if yes - run enum4linux on target)
+4) run NSE scripts (NmapVuln & Enumerator) on those ports
 
 ----------------------------------------------------------------------------------------------------
 
