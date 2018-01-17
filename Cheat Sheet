@@ -1,6 +1,6 @@
 1) nmap all ports
 2) Look for services and their exploit POC's.
-3) Web ports are open? Nikto them.
+3) Web ports are open? Nikto them (Tuning step-by-step).
 4) Check for null sessions using cme (if yes - run enum4linux on target)
 5) run NSE scripts (NmapVuln & Enumerator) on those ports
 
