@@ -104,6 +104,12 @@ https://netsec.ws/?p=331
 
 Windows Privilege Escalation
 
+http://www.bhafsec.com/wiki/index.php/Windows_Privilege_Escalation
+
+https://github.com/abatchy17/WindowsExploits
+
+https://github.com/SecWiki/windows-kernel-exploits
+
 https://labs.mwrinfosecurity.com/assets/1089/original/Windows_Services_-_All_roads_lead_to_SYSTEM-1.1-oct15.pdf
 
 https://www.insomniasec.com/downloads/publications/WindowsPrivEsc.ppt
@@ -121,6 +127,10 @@ https://github.com/GDSSecurity/Windows-Exploit-Suggester
 Linux Privilege Escalation
 
 https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+
+https://github.com/SecWiki/linux-kernel-exploits
+
+https://github.com/xairy/linux-kernel-exploitation
 
 https://www.youtube.com/watch?v=oYHAi0cgur4
 
