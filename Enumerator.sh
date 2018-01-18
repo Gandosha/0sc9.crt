@@ -17,7 +17,7 @@ do
         printf "\033[1;35mOpen TCP ports in $target are:\033[0m\n"
 	nmap -sS -sV -p- -Pn -T4 $target --open
 	echo
-        printf "\033[1;35mOpen TCP ports in $target are:\033[0m\n"
+        printf "\033[1;35mOpen UDP ports in $target are:\033[0m\n"
 	nmap -sU -sV -p- -Pn -T4 $target --open
 	echo
 	printf "\033[1;35mStarting to enumerate $target using NBTSCAN...\033[0m\n"
