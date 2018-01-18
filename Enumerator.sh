@@ -14,11 +14,11 @@ echo
 while read target;
 do
 	echo
-        printf "\033[1;35mOpen ports in $target are:\033[0m\n"
-	nmap -sS -sV -p- -T4 $target --open
+        printf "\033[1;35mOpen TCP ports in $target are:\033[0m\n"
+	nmap -sS -sV -p- -Pn -T4 $target --open
 	echo
-	printf "\033[1;35mEnumerating for NULL sessions $target ...\033[0m\n"
-	crackmapexec smb $target -u '' -p '' --server http --shares --sessions --users --lusers --spider --content --verbose
+        printf "\033[1;35mOpen TCP ports in $target are:\033[0m\n"
+	nmap -sU -sV -p- -Pn -T4 $target --open
 	echo
 	printf "\033[1;35mStarting to enumerate $target using NBTSCAN...\033[0m\n"
 	nbtscan -r $target
