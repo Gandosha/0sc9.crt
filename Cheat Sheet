@@ -1,3 +1,4 @@
+*identify Targets nmap -sn*
 1) nmap all ports (TCP & UDP)
 2) nmap with decoy (nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> /// nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>) 
 3) refer to https://nmap.org/book/man-bypass-firewalls-ids.html in order to evade firewall.
