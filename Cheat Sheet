@@ -1,9 +1,10 @@
 1) nmap all ports (TCP & UDP)
 2) nmap with decoy (nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> /// nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>) 
-2) Look for services and their exploit POC's.
-3) Web ports are open? Nikto them (Tuning step-by-step).
-4) Check for null sessions using cme (if yes - run enum4linux on target)
-5) run NSE scripts (NmapVuln & Enumerator) on those ports
+3) refer to https://nmap.org/book/man-bypass-firewalls-ids.html in order to evade firewall.
+4) Look for services and their exploit POC's.
+5) Web ports are open? Nikto them (Tuning step-by-step).
+6) Check for null sessions using cme (if yes - run enum4linux on target)
+7) run NSE scripts (NmapVuln & Enumerator) on those ports
 
 ----------------------------------------------------------------------------------------------------
 
