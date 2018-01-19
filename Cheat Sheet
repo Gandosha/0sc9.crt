@@ -5,7 +5,7 @@
 3) refer to https://nmap.org/book/man-bypass-firewalls-ids.html in order to evade firewall.
 4) Look for services and their exploit POC's.
 5) Web ports are open? (nikto -Display V -host <IP_ADDRESS> -port <PORT> -Tuning x 6 -o ~/Desktop/<IP_ADDRESS>/Nikto_Output.html -Format html)
-6) Check for null sessions using cme (if yes - run enum4linux on target)
+6) Check for null sessions (run enum4linux -a on the target)
 7) run NSE scripts (NmapVuln & Enumerator) on those ports
 
 ----------------------------------------------------------------------------------------------------
