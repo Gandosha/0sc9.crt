@@ -1,10 +1,10 @@
 *identify Targets nmap -sn*
 1) nmap all ports (TCP & UDP)
-2) nmap and spoof source port (--source-port <portnumber>) // spoof source addres (-S <IP_Address>)
+2) nmap and spoof source port (--source-port <portnumber>) // spoof source address(-S <IP_Address>)
 2) nmap with decoy (nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> /// nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>) 
 3) refer to https://nmap.org/book/man-bypass-firewalls-ids.html in order to evade firewall.
 4) Look for services and their exploit POC's.
-5) Web ports are open? Nikto them (Tuning step-by-step).
+5) Web ports are open? (nikto -Display V -host <IP_ADDRESS> -port <PORT> -Tuning x 6 -o ~/Desktop/<IP_ADDRESS>/Nikto_Output.html -Format html)
 6) Check for null sessions using cme (if yes - run enum4linux on target)
 7) run NSE scripts (NmapVuln & Enumerator) on those ports
 
