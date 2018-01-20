@@ -29,7 +29,7 @@ Enumeration Roadmap
 
 **3. Any web port(s) for further enumeration?**
 ----------------------------------------------------------------------------------------------------------------------
-* nikto -Display V -host <IP_ADDRESS> -port <PORT> -Tuning x 6 -o ~/Desktop/<IP_ADDRESS>/Nikto_Output.html -Format html
+* nikto -Display V -host <IP_ADDRESS> -port <PORTS_NUMS> -Tuning x 6 -o ~/Desktop/<IP_ADDRESS>/Nikto_Output.html -Format html
    
 * Fuzz directories using ZAP  (/usr/share/secLists/Discovery folder that has some great wordlists for this)
 
