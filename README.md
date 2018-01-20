@@ -7,13 +7,13 @@ Enumeration Roadmap
 ----------------------------------------------------------------------------------------------------------------------
 * nmap -sn /24    (Identify targets in subnet)
 
-* nmap -sS -sV -p- -T4 -Pn <TARGET>    (TCP scan)
+* nmap -sS -sV -p- -T4 -Pn <IP_ADDRESS>    (TCP scan)
 
-* nmap -sU -sV -p- -T4 -Pn <TARGET>    (UDP scan)
+* nmap -sU -sV -p- -T4 -Pn <IP_ADDRESS>    (UDP scan)
    
-* nc -nv <TARGET> <PORT>     (Grab banners manually for more clarity) 
+* nc -nv <IP_ADDRESS> <PORT_NUM>     (Grab banners manually for more clarity) 
 
-* --source-port <portnumber> // -S <IP_Address>    (Spoof)
+* --source-port <PORT_NUM> // -S <IP_Address>    (Spoof)
 
 * nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>     (TCP Decoy) 
    
