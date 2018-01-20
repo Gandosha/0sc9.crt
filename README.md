@@ -41,12 +41,12 @@ sc config <SERVICE_NAME> start= auto
 net start <SERVICE_NAME>
 
 ----------------------------------------------------------------------------------------------------------------------
+Enumeration Roadmap
+----------------------------------------------------------------------------------------------------------------------
 
-Enumeration Roadmap (for 0sc9 Labs):
+*Step 1: Nmap basic scan*
 
-**identify Targets in subnet (nmap -sn /24)**
-
-Step 1: Nmap basic scan
+identify Targets in subnet (nmap -sn /24)
 
 nmap -sS -sV -p- -T4 -Pn <TARGET>
 
