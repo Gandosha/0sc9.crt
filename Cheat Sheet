@@ -42,13 +42,17 @@ net start <SERVICE_NAME>
 
 Enumeration Roadmap (for 0sc9 Labs):
 
-As promised earlier, I’m going to share my specific strategy that I used for enumerating the lab machines. Please take what you like and tweak it to customize it for what you find best. You can also go a step further and put these all in a code for automation during exam. These are my chicken notes so please bear with me. Here we go:
+**identify Targets in subnet (nmap -sn /24)**
 
 Step 1: Nmap basic scan
 
-Nmap -Pn -p- -vv <ip address>
+nmap -sS -sV -p- -T4 -Pn <TARGET>
 
-Nmap -Pn -p- -sU -vv <ip address>
+nmap -sU -sV -p- -T4 -Pn <TARGET>
+
+nmap and spoof source port (--source-port <portnumber>) // spoof source address(-S <IP_Address>)
+
+nmap with decoy (nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> /// nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>)
 
 Step 2: Nmap version and vulnerability Scan:
 
