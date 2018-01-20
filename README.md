@@ -11,7 +11,7 @@ Enumeration Roadmap
 
 * nmap -sU -sV -p- -T4 -Pn <TARGET>    (UDP scan)
    
-* nc -nv <ip-address> <port>     (Grab banners manually for more clarity) 
+* nc -nv <TARGET> <PORT>     (Grab banners manually for more clarity) 
 
 * --source-port <portnumber> // -S <IP_Address>    (Spoof)
 
