@@ -28,7 +28,7 @@ msf>exploit -j
 
 The -j option is to keep all the connected session in the background.
 ----------------------------------------------------------------------------
-*********** Post - privs escalation ***********
+Post - privs escalation
 
 * Accesschk stuff
 accesschk.exe /accepteula (first thing to do in CLI access)
