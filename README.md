@@ -7,15 +7,17 @@ Enumeration Roadmap
 
 **1. Nmap basic scan**
 ----------------------------------------------------------------------------------------------------------------------
-* Identify Targets in subnet (nmap -sn /24)
+* nmap -sn /24
 
-* TCP scan (nmap -sS -sV -p- -T4 -Pn <TARGET>)
+* nmap -sS -sV -p- -T4 -Pn <TARGET>
 
-* UDP scan (nmap -sU -sV -p- -T4 -Pn <TARGET>)
+* nmap -sU -sV -p- -T4 -Pn <TARGET>
 
-* Nmap and spoof source port // IP address (--source-port <portnumber>) // (-S <IP_Address>)
+* --source-port <portnumber> // -S <IP_Address> (Spoof)
 
-* Nmap with decoy (nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> /// nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>)
+* nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> (TCP Decoy) 
+   
+* nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> (UDP Decoy)
 
 **2. Nmap version and vulnerability Scan**
 ----------------------------------------------------------------------------------------------------------------------
