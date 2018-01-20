@@ -1,8 +1,6 @@
-# 0sc9.crt
-
 
 ----------------------------------------------------------------------------------------------------------------------
-Enumeration Roadmap
+0sc9.crt Enumeration Roadmap
 ----------------------------------------------------------------------------------------------------------------------
 
 **1. Nmap basic scan**
@@ -22,9 +20,11 @@ Enumeration Roadmap
 * nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>     (UDP Decoy)
 
 
+
 **2. Nmap version and vulnerability Scan**
 ----------------------------------------------------------------------------------------------------------------------
 * nmap -Pn -sV -O -pT:{TCP ports found in step 1},U:{UDP ports found in step 1} -script *vuln* <TARGET>
+
 
 
 **3. Any web port(s) for further enumeration?**
@@ -36,7 +36,8 @@ Enumeration Roadmap
 * fimap -u <TARGET>     (If you see any LFI/RFI vulnerability posted by Nikto)
 
 
-**4 Are there any exploits available publicly from the services discovered from Step 2?**
+
+**4. Are there any exploits available publicly from the services discovered from Step 2?**
 ----------------------------------------------------------------------------------------------------------------------
 Searchsploit <service name>
 
