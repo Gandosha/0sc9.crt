@@ -21,30 +21,23 @@ Enumeration Roadmap
    
 * nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>     (UDP Decoy)
 
+
 **2. Nmap version and vulnerability Scan**
 ----------------------------------------------------------------------------------------------------------------------
 * nmap -Pn -sV -O -pT:{TCP ports found in step 1},U:{UDP ports found in step 1} -script *vuln* <TARGET>
 
-**3. Any web port(s) for further enumeration?
+
+**3. Any web port(s) for further enumeration?**
 ----------------------------------------------------------------------------------------------------------------------
-Nikto -port {web ports} -host <ip address> -o <output file.txt>
+* nikto -Display V -host <IP_ADDRESS> -port <PORT> -Tuning x 6 -o ~/Desktop/<IP_ADDRESS>/Nikto_Output.html -Format html
+   
+* Fuzz directories using ZAP  (/usr/share/secLists/Discovery folder that has some great wordlists for this)
 
-Dirb http{s}://<ip address>:<port> /usr/share/wordlist/dirb/{common/small/vulns}.txt
+* fimap -u <TARGET>     (If you see any LFI/RFI vulnerability posted by Nikto)
 
-Gobuster -u http://<ip-address> -w /usr/share/Seclists/Discovery/Web_Content/common.txt
 
-/usr/share/secLists/Discovery folder has some great word lists
-
-If only web port visible try a bigger list in dirb: /usr/share/wordlist/dirb/big.txt
-
-Use Zaproxy/Burpsuite as needed
-
-Do you see any interesting directory containing sensitive data?
-
-Do you see any LFI/RFI vulnerability posted by Nikto? Try fimap: fimap -u <ip-address>
-
-* Are there any exploits available publicly from the services discovered from Step 2?
-
+**4 Are there any exploits available publicly from the services discovered from Step 2?**
+----------------------------------------------------------------------------------------------------------------------
 Searchsploit <service name>
 
 http://www.securityfocus.com/vulnerabilities
