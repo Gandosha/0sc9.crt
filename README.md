@@ -7,26 +7,26 @@ Enumeration Roadmap
 
 **1. Nmap basic scan**
 ----------------------------------------------------------------------------------------------------------------------
-* nmap -sn /24
+* nmap -sn /24    (Identify targets in subnet)
 
-* nmap -sS -sV -p- -T4 -Pn <TARGET>
+* nmap -sS -sV -p- -T4 -Pn <TARGET>    (TCP scan)
 
-* nmap -sU -sV -p- -T4 -Pn <TARGET>
-
-* --source-port <portnumber> // -S <IP_Address> (Spoof)
-
-* nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> (TCP Decoy) 
+* nmap -sU -sV -p- -T4 -Pn <TARGET>    (UDP scan)
    
-* nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> (UDP Decoy)
+* nc -nv <ip-address> <port>     (Grab banners manually for more clarity) 
+
+* --source-port <portnumber> // -S <IP_Address>    (Spoof)
+
+* nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>     (TCP Decoy) 
+   
+* nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>     (UDP Decoy)
 
 **2. Nmap version and vulnerability Scan**
 ----------------------------------------------------------------------------------------------------------------------
-Nmap -Pn -sV -O -pT:{TCP ports found in step 1},U:{UDP ports found in step 1} -script *vuln* <ip address>
+* nmap -Pn -sV -O -pT:{TCP ports found in step 1},U:{UDP ports found in step 1} -script *vuln* <TARGET>
 
-Grab banners manually for more clarity: nc -nv <ip-address> <port>
-
-* Any web port(s) for further enumeration?
-
+**3. Any web port(s) for further enumeration?
+----------------------------------------------------------------------------------------------------------------------
 Nikto -port {web ports} -host <ip address> -o <output file.txt>
 
 Dirb http{s}://<ip address>:<port> /usr/share/wordlist/dirb/{common/small/vulns}.txt
