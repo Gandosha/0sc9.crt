@@ -45,7 +45,7 @@ Enumeration Roadmap
 ----------------------------------------------------------------------------------------------------------------------
 
 * Nmap basic scan
-
+------------------
 identify Targets in subnet (nmap -sn /24)
 
 nmap -sS -sV -p- -T4 -Pn <TARGET>
