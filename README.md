@@ -44,19 +44,19 @@ net start <SERVICE_NAME>
 Enumeration Roadmap
 ----------------------------------------------------------------------------------------------------------------------
 
-1. **Nmap basic scan**
+**1. Nmap basic scan**
 ----------------------------------------------------------------------------------------------------------------------
-identify Targets in subnet (nmap -sn /24)
+* Identify Targets in subnet (nmap -sn /24)
 
-nmap -sS -sV -p- -T4 -Pn <TARGET>
+* TCP scan (nmap -sS -sV -p- -T4 -Pn <TARGET>)
 
-nmap -sU -sV -p- -T4 -Pn <TARGET>
+* UDP scan (nmap -sU -sV -p- -T4 -Pn <TARGET>)
 
-nmap and spoof source port (--source-port <portnumber>) // spoof source address(-S <IP_Address>)
+* Nmap and spoof source port // IP address (--source-port <portnumber>) // (-S <IP_Address>)
 
-nmap with decoy (nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> /// nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>)
-----------------------------------------------------------------------------------------------------------------------
-2. **Nmap version and vulnerability Scan**
+* Nmap with decoy (nmap -sS -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET> /// nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>)
+
+**2. Nmap version and vulnerability Scan**
 ----------------------------------------------------------------------------------------------------------------------
 Nmap -Pn -sV -O -pT:{TCP ports found in step 1},U:{UDP ports found in step 1} -script *vuln* <ip address>
 
