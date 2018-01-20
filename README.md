@@ -7,9 +7,9 @@ Enumeration Roadmap
 ----------------------------------------------------------------------------------------------------------------------
 * nmap -sn /24    (Identify targets in subnet)
 
-* nmap -sS -sV -p- -T4 -Pn <IP_ADDRESS>    (TCP scan)
+* nmap -sS -sV -A -p- -T4 -Pn <IP_ADDRESS>    (TCP scan)
 
-* nmap -sU -sV -p- -T4 -Pn <IP_ADDRESS>    (UDP scan)
+* nmap -sU -sV -A -p- -T4 -Pn <IP_ADDRESS>    (UDP scan)
    
 * nc -nv <IP_ADDRESS> <PORT_NUM>     (Grab banners manually for more clarity) 
 
