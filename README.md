@@ -70,8 +70,8 @@ Check for Input Validation in forms (like: 1′ or 1=1 limit 1;#   AND   1′ or
     ../
         Directory Traversal Vulnerabilities.
 
-* Are there any NETBIOS, SMB, RPC ports discovered from Step 1?
-
+**5. Are there any NETBIOS, SMB, RPC ports discovered from Step 1?**
+----------------------------------------------------------------------------------------------------------------------
 enum4linux -a <ip address>
 
 Rpcclient <ip address> -U “” -N
