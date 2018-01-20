@@ -44,7 +44,7 @@ net start <SERVICE_NAME>
 Enumeration Roadmap
 ----------------------------------------------------------------------------------------------------------------------
 
-* Nmap basic scan
+1. Nmap basic scan*
 ------------------
 identify Targets in subnet (nmap -sn /24)
 
