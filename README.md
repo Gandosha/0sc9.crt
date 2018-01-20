@@ -181,6 +181,9 @@ Use Wireshark / tcpdump to capture traffic on the target host:
 ----------------------------------------------------------------------------------------------------------------------
 **More**
 ----------------------------------------------------------------------------------------------------------------------
+sort <WORDLIST_PATH> | uniq          (Outputs unique words in a wordlist that is found)
+sort <WORDLIST_PATH> | uniq | wc -l  (sorts number of unique words in a wordlist that is found)
+
 *CME
 crackmapexec smb <TARGET/S> -u <LOCAL_USER_NAME> -H <XXX_LMHASH_XX>:<XXX_NTHASH_000> --local (PTH local creds) 
 crackmapexec smb <TARGET/S> -u '' -p '' (NULL Sessions)
