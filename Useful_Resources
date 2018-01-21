@@ -83,6 +83,8 @@ If you follow the above steps, you will be able to do exploitation with buffer o
 
 Many people shy away from preparing for buffer overflows because it helps to exploit only one machine in the exam. But still, it’s a very important and interesting concept. I have seen many people failing because of improper preparation on buffer overflows. Moreover, OSCP is not the target. All the things you learn here is for the real world.
 
+Practice on BO: https://www.vulnhub.com/entry/brainpan-1,51/
+
 Some Valuable Resources           
 
 These are some valuable resources which I found very useful in my OSCP Preparation. Many of them are now permanent reference resources even after I have cleared my OSCP.
