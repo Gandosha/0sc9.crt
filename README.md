@@ -82,7 +82,7 @@ Check for Input Validation in forms (like: 1′ or 1=1 limit 1;#   AND   1′ or
 ----------------------------------------------------------------------------------------------------------------------
 enum4linux -a <ip address> **(For more info - https://labs.portcullis.co.uk/tools/enum4linux/)**
 
-Rpcclient <ip address> -U “” -N
+Rpcclient <ip address> -U “” -N **(For more info - https://attackerkb.com/Windows/rpcclient)**
 
 Rpcinfo: What services are running? Rpcinfo -p <target ip>
 
