@@ -1,6 +1,6 @@
 
 ----------------------------------------------------------------------------------------------------------------------
-Enumeration Roadmap
+Enumeration
 ----------------------------------------------------------------------------------------------------------------------
 
 **1. Nmap basic scan**
@@ -32,6 +32,7 @@ Enumeration Roadmap
 **3. Any web port(s) for further enumeration?**
 ----------------------------------------------------------------------------------------------------------------------
 * nikto -Display V -host <IP_ADDRESS> -port <PORTS_NUMS> -Tuning x 6 -o ~/Desktop/<IP_ADDRESS>/Nikto_Output.html -Format html
+** Nikto CMDs at https://cirt.net/nikto2-docs/options.html#id2741238 **
    
 * Fuzz directories using ZAP  (/usr/share/secLists/Discovery folder that has some great wordlists for this)
 
@@ -178,6 +179,10 @@ Use Wireshark / tcpdump to capture traffic on the target host:
 
 “tcpdump -i tap0  host <target-ip> tcp port 80 and not arp and not icmp -vv”
 
+
+----------------------------------------------------------------------------------------------------------------------
+Enumeration
+----------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
 **More**
 ----------------------------------------------------------------------------------------------------------------------
