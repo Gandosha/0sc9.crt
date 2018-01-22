@@ -288,6 +288,8 @@ net start <SERVICE_NAME>
 
 **Linux:**
 
+* SETUID combina - https://gist.github.com/dergachev/7916152
+
 * LinEnum
 http://www.rebootuser.com/?p=1758
 This tool is great at running through a heap of things you should check on a Linux system in the post exploit process. This include file permissions, cron jobs if visible, weak credentials etc. The first thing I run on a newly compromised system.
