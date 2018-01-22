@@ -49,9 +49,9 @@ Enumeration
 
 Copy exploit to local dir: searchsploit -m <ID>
    
-**Precompiled windows exploits - https://github.com/abatchy17/WindowsExploits**
-
-
+**Precompiled windows exploits** - https://github.com/abatchy17/WindowsExploits
+**Windows kernel exploits** - https://github.com/SecWiki/windows-kernel-exploits
+**Linux kernel exploits** - https://github.com/SecWiki/linux-kernel-exploits
 
 **5. Manual Poking for Web Pages**
 ----------------------------------------------------------------------------------------------------------------------
