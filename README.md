@@ -7,9 +7,9 @@ Enumeration
 ----------------------------------------------------------------------------------------------------------------------
 * nmap -sn /24    (Identify targets in subnet)
 
-* nmap -sS -sV -A -p- -T4 -Pn <IP_ADDRESS>    (TCP scan)
+* nmap -sS -p- -T4 -Pn <IP_ADDRESS>    (TCP scan)
 
-* nmap -sU -sV -A -p- -T4 -Pn <IP_ADDRESS>    (UDP scan)
+* nmap -sU -p- -T4 -Pn <IP_ADDRESS>    (UDP scan)
    
 * nc -nv <IP_ADDRESS> <PORT_NUM>     (Grab banners manually for more clarity) 
 
@@ -19,7 +19,7 @@ Enumeration
    
 * nmap -sU -sV -Pn -T4 -D <FAKE_IP_ADDRESS> <TARGET>     (UDP Decoy)
 
-* refer to https://nmap.org/book/man-bypass-firewalls-ids.html in order to evade firewall.
+* Refer to https://nmap.org/book/man-bypass-firewalls-ids.html in order to evade firewall.
 
 
 
