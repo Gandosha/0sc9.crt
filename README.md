@@ -111,7 +111,7 @@ Check NMAP Scripts for SMB, DCERPC and NETBIOS
 
 **7. Any SMTP ports available?**
 ----------------------------------------------------------------------------------------------------------------------
-**recommended wordlists at /usr/share/metasploit-framework/data/wordlists & /usr/share/seclists/Usernames**
+**Recommended wordlists at /usr/share/metasploit-framework/data/wordlists & /usr/share/seclists/Usernames**
 
 
 **Enumerate commands (nmap -A does this scan if port is open in step 2)**
