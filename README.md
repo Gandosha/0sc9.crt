@@ -271,7 +271,8 @@ Once the required values are completed the following command will execute your h
 ----------------------------------------------------------------------------------------------------------------------
 TTY Shells
 ----------------------------------------------------------------------------------------------------------------------
-* **Tips / Tricks to spawn a TTY shell from a limited shell in Linux, useful for running commands like su from reverse shells.**
+**Tips / Tricks to spawn a TTY shell from a limited shell in Linux, useful for running commands like su from reverse shells.**
+----------------------------------------------------------------------------------------------------------------------
 
 **Python TTY Shell Trick**
 
@@ -359,11 +360,11 @@ More useful info
 ----------------------------------------------------------------------------------------------------------------------
 **More**
 ----------------------------------------------------------------------------------------------------------------------
-sort <WORDLIST_PATH> | uniq          (Outputs unique words in a wordlist that is found)
-sort <WORDLIST_PATH> | uniq | wc -l  (sorts number of unique words in a wordlist that is found)
+* sort <WORDLIST_PATH> | uniq          (Outputs unique words in a wordlist that is found)
+* sort <WORDLIST_PATH> | uniq | wc -l  (sorts number of unique words in a wordlist that is found)
 
-ip -4 addr show scope global    /*Determine interfaces ip address + prefix*/
-ip route show | grep default    /*Determine which interface is public*/
+* ip -4 addr show scope global    /*Determine interfaces ip address + prefix*/
+* ip route show | grep default    /*Determine which interface is public*/
 
 **CME**
 * crackmapexec smb <TARGET/S> -u <LOCAL_USER_NAME> -H <XXX_LMHASH_XX>:<XXX_NTHASH_000> --local (PTH local creds) 
