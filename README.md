@@ -112,15 +112,16 @@ Check NMAP Scripts for SMB, DCERPC and NETBIOS
 **7. Any SMTP ports available?**
 ----------------------------------------------------------------------------------------------------------------------
 recommended wordlists at /usr/share/metasploit-framework/data/wordlists & /usr/share/seclists/Usernames
-----------------------------------------------------------------------------------------------------------------------
+
+
 **Enumerate commands (nmap -A does this scan if port is open in step 2)**
 nmap --script smtp-commands.nse [--script-args smtp-commands.domain=<domain>] -pT:25,465,587 <IP_ADDRESS>
 
 **verify if username exists**
-* smtp-user-enum -M VRFY -U <WORDLIST> -t <IP_ADDRESS>
+* smtp-user-enum -M VRFY -U <WORDLIST_PATH> -t <IP_ADDRESS>
  
 **verify if username is valid**
-* smtp-user-enum -M EXPN -U <WORDLIST> -t <IP_ADDRESS>
+* smtp-user-enum -M EXPN -U <WORDLIST_PATH> -t <IP_ADDRESS>
 
 **8. How about SNMP ports?**
 ----------------------------------------------------------------------------------------------------------------------
