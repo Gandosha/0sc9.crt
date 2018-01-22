@@ -23,7 +23,7 @@ Enumeration
 
 
 
-**2. Nmap script engine, version and vulnerability Scan**
+**2. Nmap version and vulnerability Scan**
 ----------------------------------------------------------------------------------------------------------------------
 
 * nmap -Pn -sV -A -pT:{TCP ports found in step 1},U:{UDP ports found in step 1} -script vuln <IP_ADDRESS>
