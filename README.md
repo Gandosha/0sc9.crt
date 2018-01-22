@@ -326,8 +326,6 @@ net start <SERVICE_NAME>
 
 **Linux:**
 
-* SETUID combina - https://gist.github.com/dergachev/7916152
-
 * LinEnum
 http://www.rebootuser.com/?p=1758
 This tool is great at running through a heap of things you should check on a Linux system in the post exploit process. This include file permissions, cron jobs if visible, weak credentials etc. The first thing I run on a newly compromised system.
@@ -350,7 +348,14 @@ SSH Tunneling
 ----------------------------------------------------------------------------------------------------------------------
 * https://chamibuddhika.wordpress.com/2012/03/21/ssh-tunnelling-explained/
 
+----------------------------------------------------------------------------------------------------------------------
+Backdooring
+----------------------------------------------------------------------------------------------------------------------
+* setuid bit combina (root permissions required) - https://gist.github.com/dergachev/7916152
+   * ls -al /bin/nano       #    -rwxr-xr-x 1 root root 191976 2010-02-01 20:30 /bin/nano
+   * chmod u+s /bin/nano    # installs the backdoor
 
+----------------------------------------------------------------------------------------------------------------------
 More useful info
 ----------------------------------------------------------------------------------------------------------------------
 * https://highon.coffee/blog/penetration-testing-tools-cheat-sheet/
