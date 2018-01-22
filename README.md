@@ -49,9 +49,9 @@ Enumeration
 
 Copy exploit to local dir: searchsploit -m <ID>
    
-**Precompiled windows exploits** - https://github.com/abatchy17/WindowsExploits
-**Windows kernel exploits** - https://github.com/SecWiki/windows-kernel-exploits
-**Linux kernel exploits** - https://github.com/SecWiki/linux-kernel-exploits
+* **Precompiled windows exploits** - https://github.com/abatchy17/WindowsExploits
+* **Windows kernel exploits** - https://github.com/SecWiki/windows-kernel-exploits
+* **Linux kernel exploits** - https://github.com/SecWiki/linux-kernel-exploits
 
 **5. Manual Poking for Web Pages**
 ----------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ Check for Input Validation in forms (like: 1′ or 1=1 limit 1;#   AND   1′ or
 
 **6. Are there any NETBIOS, SMB, RPC ports discovered from Step 1?**
 ----------------------------------------------------------------------------------------------------------------------
-enum4linux -a <ip address>
+enum4linux -a <ip address> **(For more info - https://labs.portcullis.co.uk/tools/enum4linux/)**
 
 Rpcclient <ip address> -U “” -N
 
@@ -290,9 +290,17 @@ This is a great tool for once again checking a lot of standard things like file 
 http://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
 Not so much a script as a resource, g0tmi1k’s blog post here has led to so many privilege escalations on Linux system’s it’s not funny. Would definitely recommend trying out everything on this post for enumerating systems. 
 
-
+----------------------------------------------------------------------------------------------------------------------
+Transferring files
+----------------------------------------------------------------------------------------------------------------------
+* https://blog.ropnop.com/transferring-files-from-kali-to-windows/
 
 ----------------------------------------------------------------------------------------------------------------------
+SSH Tunneling
+----------------------------------------------------------------------------------------------------------------------
+* https://chamibuddhika.wordpress.com/2012/03/21/ssh-tunnelling-explained/
+
+
 More useful info
 ----------------------------------------------------------------------------------------------------------------------
 * https://highon.coffee/blog/penetration-testing-tools-cheat-sheet/
