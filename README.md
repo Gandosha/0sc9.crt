@@ -32,7 +32,7 @@ Enumeration
 **3. Any web port(s) for further enumeration?**
 ----------------------------------------------------------------------------------------------------------------------
 * nikto -Display V -host <IP_ADDRESS> -port <PORTS_NUMS> -Tuning x 6 -o ~/Desktop/<IP_ADDRESS>/Nikto_Output.html -Format html
-** Nikto CMDs at https://cirt.net/nikto2-docs/options.html#id2741238 **
+**Nikto CMDs at https://cirt.net/nikto2-docs/options.html#id2741238**
    
 * Fuzz directories using ZAP  (/usr/share/secLists/Discovery folder that has some great wordlists for this)
 
