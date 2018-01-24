@@ -360,6 +360,16 @@ Backdooring
    * ls -al /bin/nano       #    -rwxr-xr-x 1 root root 191976 2010-02-01 20:30 /bin/nano
    * chmod u+s /bin/nano    # installs the backdoor
 
+SQL Injection
+**Examples**
+* Boolean Blind SQL Injection - https://www.youtube.com/watch?v=4LM_EIehbsU
+* Time Based SQL Injection - https://www.youtube.com/watch?v=mphLv1ZCMf8 
+* /*/bWAPP/sqli_5.php?title=The+Dark+Knight+Rises'-if(length(database())%3d'5',sleep(5),1)%23&action=go
+
+**Cheat Sheets:**
+* https://websec.ca/kb/sql_injection#MSSQL_Default_Databases
+* http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet
+* https://github.com/codingo/OSCP-2/blob/master/Documents/SQL%20Injection%20Cheatsheet.md
 ----------------------------------------------------------------------------------------------------------------------
 More useful info
 ----------------------------------------------------------------------------------------------------------------------
