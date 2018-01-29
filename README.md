@@ -189,6 +189,10 @@ Use Wireshark / tcpdump to capture traffic on the target host:
 
 “tcpdump -i tap0  host <target-ip> tcp port 80 and not arp and not icmp -vv”
 
+**12. SSH
+----------------------------------------------------------------------------------------------------------------------
+https://www.digitalocean.com/community/tutorials/ssh-essentials-working-with-ssh-servers-clients-and-keys
+
 
 ----------------------------------------------------------------------------------------------------------------------
 Payload generation
