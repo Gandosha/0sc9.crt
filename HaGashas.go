@@ -4,9 +4,15 @@ package main
 import "fmt"
 import "io/ioutil"
 import "os/exec"
+import "strings"
 
-/* This function extracts attaker's IP address from ifconfig command output */
-func whatIsMyIP() {
+/* This function responsible on program's flags. */
+func flags()
+
+
+
+/* This function extracts attaker's IP address from ifconfig command output according to the interface that is given as a flag. */
+func whatIsMyIP(netInterface string) {
 	ifconfigCmd := exec.Command("ifconfig")
 	ifconfigIn, _ := ifconfigCmd.StdinPipe()
 	ifconfigOut, _ := ifconfigCmd.StdoutPipe()
@@ -15,10 +21,14 @@ func whatIsMyIP() {
 	ifconfigIn.Close()
 	ifconfigBytes, _ := ioutil.ReadAll(ifconfigOut)
 	ifconfigCmd.Wait()
-	s := []string{string(ifconfigBytes)} //slice it
-	fmt.Println(s)
-
-	
+	ifconfig := string(ifconfigBytes)
+	netInterfaceIndex := strings.Index(ifconfig, netInterface)
+	ifconfigTrimmed := ifconfig[netInterfaceIndex:netInterfaceIndex+250]
+	inetIndex := strings.Index(ifconfigTrimmed, "inet")
+	ifconfigTrimmed2 := ifconfigTrimmed[inetIndex+5:]
+	spaceIndex := strings.Index(ifconfigTrimmed2, " ")
+	ipAddress := ifconfigTrimmed2[:spaceIndex]	
+	fmt.Println(ipAddress)
 }
 
 
@@ -29,6 +39,6 @@ func identifyTargetsInSubnet */
 
 
 func main() {
-	whatIsMyIP()
+	whatIsMyIP("enp0s3")
 	
 }
