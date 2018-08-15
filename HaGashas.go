@@ -1,12 +1,15 @@
 /* This command-line program is ment for aiding penetration testers in the enumeration proccess. */
 package main
 
-import "fmt"
-import "io/ioutil"
-import "os/exec"
-import "strings"
-import "flag"
-import "os"
+import (
+	"fmt"
+	"unicode/utf8"
+ 	"io/ioutil"
+ 	"os/exec"
+ 	"strings"
+ 	"flag"
+	"os"
+)
 
 /* This function extracts attaker's IP address from ifconfig command output according to the interface that is given as a flag. */
 func whatIsMyIP(netInterface string) string{
@@ -25,25 +28,47 @@ func whatIsMyIP(netInterface string) string{
 	ifconfigTrimmed2 := ifconfigTrimmed[inetIndex+5:]
 	spaceIndex := strings.Index(ifconfigTrimmed2, " ")
 	ipAddress := ifconfigTrimmed2[:spaceIndex]	
-	return string(ipAddress)
+	return ipAddress
 }
 
 
-/* This function identifies targets in attacker's current subnet and performs a nmap vulnerability scan against them. */
+/* This function gets attacker's IP address and identifies targets in current subnet. After that it performs a nmap vulnerability scan against those targets. */
 func scanTargetsInSubnet(myIpAddress string) {
-	//Put myIpAddress in string and then trim it from the end until the first dot
-	s := myIpAddress	
-	fmt.Println(s)
+	//Put myIpAddress in variable and then change it to X.X.subnet.0
+	var dots, secondDotIndex, thirdDotIndex int
+	var dot string = "."
+	fmt.Println("ipAdd:",myIpAddress)
+	for i:= range myIpAddress {
+		if (string(myIpAddress[i]) == dot) && (dots < 2) {
+			dots++ }
+		if (string(myIpAddress[i]) == dot) && (dots == 2) {
+			secondDotIndex = i
+			dots++ }
+		if (string(myIpAddress[i]) == dot) && (dots == 3) {
+			thirdDotIndex = i }
+   	}
+	subnet := myIpAddress[secondDotIndex+1:thirdDotIndex]
+	subnetToScan := myIpAddress[:thirdDotIndex] + dot + "0"
+} 
+
+// This function returns its argument string reversed.
+func reverse(s string) string {
+	cs := make([]rune, utf8.RuneCountInString(s))
+	i := len(cs)
+	for _, c := range s {
+		i--
+		cs[i] = c
+	}
+	return string(cs)
 }
-	
 
 
 func main() {	
 	interfacePtr := flag.String("interface", "nil", "Name of the interface to use (Required! Run ifconfig before HaGashash in order to choose one).")
-	var myIpAddress string = whatIsMyIP(*interfacePtr) 
-	fmt.Println(myIpAddress)
-	hostPtr := flag.String("host", "nil", "Skip host discovery. Scan only this host (Type its IP address or domain name).")
-	subnetPtr := flag.Bool(&myIpAddress, "subnet", true, "Discover alive hosts in subnet and scan them.")
+	//var myIpAddress string = whatIsMyIP(*interfacePtr) 
+	//fmt.Println(myIpAddress)
+	//hostPtr := flag.String("host", "nil", "Skip host discovery. Scan only this host (Type its IP address or domain name).")
+	//subnetPtr := flag.Bool("subnet", true, "Discover alive hosts in subnet and scan them.")
 	/*dnsPtr := flag.Bool("dns", false, "Locate non-contiguous IP space and hostnames against specified domain. (Type "true" or "false").")
 	nmap spoof
 	nmap decoy*/
@@ -56,18 +81,18 @@ func main() {
 		flag.PrintDefaults()
 		fmt.Println("\n")
 		os.Exit(1)
-	case *hostPtr == "nil":
+	/*case *hostPtr == "nil":
 		//start to scan subnet
 		fmt.Println("\n[!] Starting to scan your subnet (/24).\n\n")
 		//whatIsMyIP(*interfacePtr)
 		scanTargetsInSubnet(myIpAddress)
 	/*case *dnsPtr == true:
-		//start fierce
+		//start fierce */
 	default:
-		fmt.Println("\n[!] Not enough flags in order to start the program. EXITING!\n\n")	
-		flag.PrintDefaults()
-		fmt.Println("\n")
-		os.Exit(1) */	
+		//start to scan subnet
+		fmt.Println("\n[!] Starting to scan your subnet (/24).\n\n")
+		//ip := whatIsMyIP(*interfacePtr)
+		scanTargetsInSubnet("192.168.111.112")
 	}
 	/*start to scan subnet
 	fmt.Println("\n[!] Starting to scan your subnet (/24).\n\n")
