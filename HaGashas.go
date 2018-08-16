@@ -32,33 +32,28 @@ func whatIsMyIP(netInterface string) string{
 }
 
 
-/* This function gets attacker's IP address and identifies targets in current subnet. After that it performs a nmap vulnerability scan against those targets. */
+/* This function gets attacker's IP address and identifies targets in his current subnet. After that it performs a nmap vulnerability scan against those targets. */
 func scanTargetsInSubnet(myIpAddress string) {
 	var dots, thirdDotIndex int
 	var dot string = "."
 	for i:= range myIpAddress {
 		if (string(myIpAddress[i]) == dot) && (dots <= 2) {
 			dots++ }
-		//if (string(myIpAddress[i]) == dot) && (dots == 2) {
-		//	secondDotIndex = i
-		//	dots++ }
 		if (string(myIpAddress[i]) == dot) && (dots == 3) {
 			thirdDotIndex = i }
    	}
 	subnetToScan := myIpAddress[:thirdDotIndex] + dot + "0"
-	fmt.Println("[!] Starting host discovery on subnet: ",subnetToScan)
-	nmapCmd := exec.Command("nmap -sn " + subnetToScan + "/24")
-	//fmt.Println(nmapCmd)
-	nmapIn, _ := nmapCmd.StdinPipe()
-	nmapOut, _ := nmapCmd.StdoutPipe()
-	nmapCmd.Start()
-	nmapIn.Write([]byte("nmap -sn " + subnetToScan + "/24"))
-	nmapIn.Close()
-	nmapBytes, _ := ioutil.ReadAll(nmapOut)
-	nmapCmd.Wait()
-	nmap := string(nmapBytes)
-	fmt.Println(nmap)
+	fmt.Println("[+] Alive hosts in " + subnetToScan + "/24 are: ")
+	nmapCmd := exec.Command("bash", "-c", "nmap -sn " + subnetToScan + "/24")
+    	nmapOut, err := nmapCmd.Output()
+    	if err != nil {
+        	panic(err)
+    	}
+    	fmt.Println(" ")
+    	fmt.Println(string(nmapOut))
+	//cut ipaddresses from nmapOut and scan them (put it in map afterwards)
 } 
+
 
 // This function returns its argument string reversed.
 func reverse(s string) string {
@@ -99,7 +94,7 @@ func main() {
 		//start fierce */
 	default:
 		//start to scan subnet
-		fmt.Println("\n[!] Starting to scan your subnet (/24).\n\n")
+		fmt.Println("\n[!] Starting to scan your subnet.\n\n")
 		ip := whatIsMyIP(*interfacePtr)
 		scanTargetsInSubnet(ip)
 	}
