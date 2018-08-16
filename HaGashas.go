@@ -36,6 +36,7 @@ func whatIsMyIP(netInterface string) string{
 func scanTargetsInSubnet(myIpAddress string) {
 	var dots, thirdDotIndex int
 	var dot string = "."
+	var forWord string = "for"
 	for i:= range myIpAddress {
 		if (string(myIpAddress[i]) == dot) && (dots <= 2) {
 			dots++ }
@@ -43,7 +44,7 @@ func scanTargetsInSubnet(myIpAddress string) {
 			thirdDotIndex = i }
    	}
 	subnetToScan := myIpAddress[:thirdDotIndex] + dot + "0"
-	fmt.Println("[+] Alive hosts in " + subnetToScan + "/24 are: ")
+	fmt.Println("[+] Alive hosts in " + subnetToScan + "/24 are:")
 	nmapCmd := exec.Command("bash", "-c", "nmap -sn " + subnetToScan + "/24")
     	nmapOut, err := nmapCmd.Output()
     	if err != nil {
@@ -51,11 +52,36 @@ func scanTargetsInSubnet(myIpAddress string) {
     	}
     	fmt.Println(" ")
     	fmt.Println(string(nmapOut))
-	//cut ipaddresses from nmapOut and scan them (put it in map afterwards)
+	//cut ipaddresses from nmapOut and put it in map afterwards.
+	fmt.Println("-------------------------------\n")
+	nmapOutput := string(nmapOut)
+	forWordIndex := strings.Index(nmapOutput, forWord)
+	nmapOutTrimmed := nmapOutput[forWordIndex+4:]
+	hostWordIndex := strings.Index(nmapOutTrimmed, "Host")
+	aliveHostAddress := nmapOutTrimmed[:hostWordIndex]
+	for j := range nmapOutput {
+		forWordIndex = strings.Index(nmapOutput, forWord)
+		nmapOutTrimmed = nmapOutput[forWordIndex+4:]
+		hostWordIndex = strings.Index(nmapOutTrimmed, "Host")
+		aliveHostAddress = nmapOutTrimmed[:hostWordIndex]
+		//put aliveHostAddress in map
+		//targetsMap[j] = aliveHostAddress
+		fmt.Println(j)
+		fmt.Println(aliveHostAddress)	
+		nmapOutTrimmed = strings.Replace(nmapOutTrimmed, aliveHostAddress, "", -1)
+	} 
+	/*forWordIndex := strings.Index(nmapOutput, forWord)
+	nmapOutTrimmed := nmapOutput[forWordIndex+4:]
+	hostWordIndex := strings.Index(nmapOutTrimmed, "Host")
+	aliveHostAddress := nmapOutTrimmed[:hostWordIndex]
+	//put aliveHostAddress in map
+	//targetsMap[j] = aliveHostAddress
+	fmt.Println(aliveHostAddress)	
+	fmt.Println(strings.Replace(nmapOutTrimmed, aliveHostAddress, "", -1))*/
 } 
 
 
-// This function returns its argument string reversed.
+/* This function returns its argument string reversed. */
 func reverse(s string) string {
 	cs := make([]rune, utf8.RuneCountInString(s))
 	i := len(cs)
@@ -79,6 +105,7 @@ func main() {
 	flag.Parse()	
 	//whatIsMyIP(*interfacePtr)
 	//fmt.Println(interfacePtr)
+	//targetsMap := make(map[int]string)	//use this as an argument in scanTargetsInSubnet(targetsMap)
 	switch {
 	case *interfacePtr == "nil":
 		fmt.Println("\n[!] Please specify an interface name. (Ex. -interface=lo)\n\n")	
