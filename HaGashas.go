@@ -31,20 +31,34 @@ func whatIsMyIP(netInterface string) string{
 	return ipAddress
 }
 
+/* This recursive function extracts IP addresses from nmap -sn output. The function gets command's output and a slice of target IPs. 
+It returns slice of target IPs updated (appended) */
+func extractIPs(sliceOfTargets []string, nmapCmdOutput string) []string {
+	var forWord string = "for"
+	forWordIndex := strings.Index(nmapCmdOutput, forWord)
+	nmapOutTrimmed := nmapCmdOutput[forWordIndex+4:]
+	hostWordIndex := strings.Index(nmapOutTrimmed, "Host")
+	aliveHostAddress := nmapOutTrimmed[:hostWordIndex]
+	nmapOutTrimmed = strings.Replace(nmapOutTrimmed, aliveHostAddress, "\n", -1)
+	if len(nmapOutTrimmed) > 0 {
+		sliceOfTargets = append(sliceOfTargets, aliveHostAddress)
+		return extractIPs(sliceOfTargets, nmapOutTrimmed) }
+	return sliceOfTargets				
+}
 
-/* This function gets attacker's IP address and identifies targets in his current subnet. After that it performs a nmap vulnerability scan against those targets. */
-func scanTargetsInSubnet(myIpAddress string) {
+
+/* This function gets empty slice and attacker's IP address. 
+Then, it identifies targets in his current subnet and performs a nmap vulnerability scan against those targets. */
+func scanTargetsInSubnet(ipAddressesSlice []string, myIpAddress string) {
 	var dots, thirdDotIndex int
 	var dot string = "."
-	var forWord string = "for"
-	for i:= range myIpAddress {
+	for i := range myIpAddress {
 		if (string(myIpAddress[i]) == dot) && (dots <= 2) {
 			dots++ }
 		if (string(myIpAddress[i]) == dot) && (dots == 3) {
 			thirdDotIndex = i }
    	}
 	subnetToScan := myIpAddress[:thirdDotIndex] + dot + "0"
-	fmt.Println("[+] Alive hosts in " + subnetToScan + "/24 are:")
 	nmapCmd := exec.Command("bash", "-c", "nmap -sn " + subnetToScan + "/24")
     	nmapOut, err := nmapCmd.Output()
     	if err != nil {
@@ -55,20 +69,22 @@ func scanTargetsInSubnet(myIpAddress string) {
 	//cut ipaddresses from nmapOut and put it in map afterwards.
 	fmt.Println("-------------------------------\n")
 	nmapOutput := string(nmapOut)
-	forWordIndex := strings.Index(nmapOutput, forWord)
+	targets := extractIPs(ipAddressesSlice, nmapOutput)
+	fmt.Println("[+] Alive hosts in " + subnetToScan + "/24 are:\n")
+	fmt.Println(targets)
+	/*forWordIndex := strings.Index(nmapOutput, forWord)
 	nmapOutTrimmed := nmapOutput[forWordIndex+4:]
 	hostWordIndex := strings.Index(nmapOutTrimmed, "Host")
 	aliveHostAddress := nmapOutTrimmed[:hostWordIndex]
-	for j := range nmapOutput {
+	for _,j := range nmapOutput {
 		forWordIndex = strings.Index(nmapOutput, forWord)
 		nmapOutTrimmed = nmapOutput[forWordIndex+4:]
 		hostWordIndex = strings.Index(nmapOutTrimmed, "Host")
 		aliveHostAddress = nmapOutTrimmed[:hostWordIndex]
-		//put aliveHostAddress in map
-		//targetsMap[j] = aliveHostAddress
-		fmt.Println(j)
-		fmt.Println(aliveHostAddress)	
 		nmapOutTrimmed = strings.Replace(nmapOutTrimmed, aliveHostAddress, "", -1)
+		fmt.Println(string(j))
+		fmt.Println(nmapOutTrimmed)	
+		
 	} 
 	/*forWordIndex := strings.Index(nmapOutput, forWord)
 	nmapOutTrimmed := nmapOutput[forWordIndex+4:]
@@ -102,7 +118,8 @@ func main() {
 	/*dnsPtr := flag.Bool("dns", false, "Locate non-contiguous IP space and hostnames against specified domain. (Type "true" or "false").")
 	nmap spoof
 	nmap decoy*/
-	flag.Parse()	
+	flag.Parse()
+	var targets []string	
 	//whatIsMyIP(*interfacePtr)
 	//fmt.Println(interfacePtr)
 	//targetsMap := make(map[int]string)	//use this as an argument in scanTargetsInSubnet(targetsMap)
@@ -123,7 +140,7 @@ func main() {
 		//start to scan subnet
 		fmt.Println("\n[!] Starting to scan your subnet.\n\n")
 		ip := whatIsMyIP(*interfacePtr)
-		scanTargetsInSubnet(ip)
+		scanTargetsInSubnet(targets, ip)
 	}
 	/*start to scan subnet
 	fmt.Println("\n[!] Starting to scan your subnet (/24).\n\n")
