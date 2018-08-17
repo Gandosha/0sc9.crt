@@ -117,7 +117,7 @@ func main() {
 		//start fierce */
 	default:
 		//start to scan subnet
-		fmt.Println("\n[!] Starting to scan your subnet.\n\n")
+		fmt.Println("\n[!] Starting to scan your subnet.\n")
 		ip := whatIsMyIP(*interfacePtr)
 		scanTargetsInSubnet(targets, ip)
 	}
