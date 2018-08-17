@@ -36,14 +36,16 @@ It returns slice of target IPs updated (appended) */
 func extractIPs(sliceOfTargets []string, nmapCmdOutput string) []string {
 	var forWord string = "for"
 	forWordIndex := strings.Index(nmapCmdOutput, forWord)
-	nmapOutTrimmed := nmapCmdOutput[forWordIndex+4:]
-	hostWordIndex := strings.Index(nmapOutTrimmed, "Host")
-	aliveHostAddress := nmapOutTrimmed[:hostWordIndex]
-	nmapOutTrimmed = strings.Replace(nmapOutTrimmed, aliveHostAddress, "\n", -1)
-	if len(nmapOutTrimmed) > 0 {
+	if forWordIndex != -1 {
+		nmapOutTrimmed := nmapCmdOutput[forWordIndex+4:]
+		hostWordIndex := strings.Index(nmapOutTrimmed, "Host")
+		aliveHostAddress := nmapOutTrimmed[:hostWordIndex]
+		nmapOutTrimmed = strings.Replace(nmapOutTrimmed, aliveHostAddress, "\n", -1) 
 		sliceOfTargets = append(sliceOfTargets, aliveHostAddress)
-		return extractIPs(sliceOfTargets, nmapOutTrimmed) }
-	return sliceOfTargets				
+		return extractIPs(sliceOfTargets, nmapOutTrimmed) 
+	} else {
+		return sliceOfTargets 
+	}		 			
 }
 
 
@@ -65,35 +67,12 @@ func scanTargetsInSubnet(ipAddressesSlice []string, myIpAddress string) {
         	panic(err)
     	}
     	fmt.Println(" ")
-    	fmt.Println(string(nmapOut))
-	//cut ipaddresses from nmapOut and put it in map afterwards.
-	fmt.Println("-------------------------------\n")
 	nmapOutput := string(nmapOut)
 	targets := extractIPs(ipAddressesSlice, nmapOutput)
 	fmt.Println("[+] Alive hosts in " + subnetToScan + "/24 are:\n")
-	fmt.Println(targets)
-	/*forWordIndex := strings.Index(nmapOutput, forWord)
-	nmapOutTrimmed := nmapOutput[forWordIndex+4:]
-	hostWordIndex := strings.Index(nmapOutTrimmed, "Host")
-	aliveHostAddress := nmapOutTrimmed[:hostWordIndex]
-	for _,j := range nmapOutput {
-		forWordIndex = strings.Index(nmapOutput, forWord)
-		nmapOutTrimmed = nmapOutput[forWordIndex+4:]
-		hostWordIndex = strings.Index(nmapOutTrimmed, "Host")
-		aliveHostAddress = nmapOutTrimmed[:hostWordIndex]
-		nmapOutTrimmed = strings.Replace(nmapOutTrimmed, aliveHostAddress, "", -1)
-		fmt.Println(string(j))
-		fmt.Println(nmapOutTrimmed)	
-		
-	} 
-	/*forWordIndex := strings.Index(nmapOutput, forWord)
-	nmapOutTrimmed := nmapOutput[forWordIndex+4:]
-	hostWordIndex := strings.Index(nmapOutTrimmed, "Host")
-	aliveHostAddress := nmapOutTrimmed[:hostWordIndex]
-	//put aliveHostAddress in map
-	//targetsMap[j] = aliveHostAddress
-	fmt.Println(aliveHostAddress)	
-	fmt.Println(strings.Replace(nmapOutTrimmed, aliveHostAddress, "", -1))*/
+	for k := range targets {
+		fmt.Println(targets[k])
+   	}
 } 
 
 
