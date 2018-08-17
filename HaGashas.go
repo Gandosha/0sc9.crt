@@ -11,7 +11,7 @@ import (
 	"os"
 )
 
-/* This function extracts attaker's IP address from ifconfig command output according to the interface that is given as a flag. */
+/* This function extracts attacker's IP address from ifconfig command output according to the interface that is given as a flag. */
 func whatIsMyIP(netInterface string) string{
 	ifconfigCmd := exec.Command("ifconfig")
 	ifconfigIn, _ := ifconfigCmd.StdinPipe()
@@ -49,9 +49,9 @@ func extractIPs(sliceOfTargets []string, nmapCmdOutput string) []string {
 }
 
 
-/* This function gets empty slice and attacker's IP address. 
-Then, it identifies targets in his current subnet and performs a nmap vulnerability scan against those targets. */
-func scanTargetsInSubnet(ipAddressesSlice []string, myIpAddress string) {
+/* This function gets empty slice of target IPs and attacker's IP address. 
+It identifies targets in his current subnet, saves those addresses in a slice of target and prints them. */
+func aliveHostsInSubnet(ipAddressesSlice []string, myIpAddress string) {
 	var dots, thirdDotIndex int
 	var dot string = "."
 	for i := range myIpAddress {
@@ -75,17 +75,13 @@ func scanTargetsInSubnet(ipAddressesSlice []string, myIpAddress string) {
    	}
 } 
 
+/* This function performs a nmap TCP/UDP/vulnerability scan on slice of target IPs*/
+func nmapVulnScan(targetsSlice []string)
+//Work with struct target https://golang.org/pkg/encoding/xml/ (see "func Unmarshal")
+//Export nmap's output to XML format.
+//Take port numbers and append to a TCP and UDP slices
+//Vuln scan those ports and export in XML 
 
-/* This function returns its argument string reversed. */
-func reverse(s string) string {
-	cs := make([]rune, utf8.RuneCountInString(s))
-	i := len(cs)
-	for _, c := range s {
-		i--
-		cs[i] = c
-	}
-	return string(cs)
-}
 
 
 func main() {	
@@ -119,7 +115,7 @@ func main() {
 		//start to scan subnet
 		fmt.Println("\n[!] Starting to scan your subnet.\n")
 		ip := whatIsMyIP(*interfacePtr)
-		scanTargetsInSubnet(targets, ip)
+		aliveHostsInSubnet(targets, ip)
 	}
 	/*start to scan subnet
 	fmt.Println("\n[!] Starting to scan your subnet (/24).\n\n")
