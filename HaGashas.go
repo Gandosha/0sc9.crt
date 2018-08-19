@@ -3,7 +3,7 @@ package main
 
 import (
 	"fmt"
-	"unicode/utf8"
+	"encoding/xml"
  	"io/ioutil"
  	"os/exec"
  	"strings"
@@ -75,16 +75,54 @@ func aliveHostsInSubnet(ipAddressesSlice []string, myIpAddress string) {
    	}
 } 
 
-/* This function performs a nmap TCP/UDP/vulnerability scan on slice of target IPs*/
-func nmapVulnScan(targetsSlice []string)
+/* This function performs a nmap TCP/UDP/vulnerability scan on target IP. */
+func nmapVulnScan(targetIP string) {
 //Work with struct target https://golang.org/pkg/encoding/xml/ (see "func Unmarshal")
-//Export nmap's output to XML format.
-//Take port numbers and append to a TCP and UDP slices
-//Vuln scan those ports and export in XML 
+//Perform basic tcp/udp scans on all ports. Then take port numbers and append to a TCP and UDP slices and export in XML
+//Vuln scan those ports and export in XML
+	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for TCP ports.")
+	nmapTCPscanCmd := exec.Command("bash", "-c", "sudo nmap -sS -p- -T4 -Pn -vv -oX ~/Desktop/TCPxml " + targetIP)
+    	nmapTCPscanCmdOut, err := nmapTCPscanCmd.Output()
+	if err != nil {
+        	panic(err)
+    	}	
+	nmapTCPscanCmdOutput := string(nmapTCPscanCmdOut)
+	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for UDP ports.")
+	nmapUDPscanCmd := exec.Command("bash", "-c", "sudo nmap -sU -p- -T4 -Pn -vv -oX ~/Desktop/UDPxml " + targetIP)
+    	nmapUDPscanCmdOut, err := nmapUDPscanCmd.Output()
+	if err != nil {
+        	panic(err)
+    	}	
+	nmapUDPscanCmdOutput := string(nmapUDPscanCmdOut)
+	//Parse Those XMLs and put values in struct
+
+
+
+
+}
+
+ 
 
 
 
 func main() {	
+	type address struct {
+		addr string `xml:"addr,attr"`
+		addrtype string `xml:"addrtype,attr"`
+		vendor string `xml:"vendor,attr"`
+}
+	type port struct {
+		portid int `xml:"portid,attr"`
+		protocol string `xml:"protocol,attr"`
+		state string `xml:"state,attr"`
+		
+}
+	type Targets struct {
+		Address []address
+   		//os string
+   		Port []port
+		//vulnerability string
+}
 	interfacePtr := flag.String("interface", "nil", "Name of the interface to use (Required! Run ifconfig before HaGashash in order to choose one).")
 	//var myIpAddress string = whatIsMyIP(*interfacePtr) 
 	//fmt.Println(myIpAddress)
@@ -116,6 +154,7 @@ func main() {
 		fmt.Println("\n[!] Starting to scan your subnet.\n")
 		ip := whatIsMyIP(*interfacePtr)
 		aliveHostsInSubnet(targets, ip)
+		nmapVulnScan("192.168.0.1")
 	}
 	/*start to scan subnet
 	fmt.Println("\n[!] Starting to scan your subnet (/24).\n\n")
