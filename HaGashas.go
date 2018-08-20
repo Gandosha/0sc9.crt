@@ -180,12 +180,10 @@ func main() {
 		fmt.Println("\n[!] Starting to scan your subnet.\n")
 		ip := whatIsMyIP(*interfacePtr)
 		tars := aliveHostsInSubnet(targets, ip)
-		fmt.Println("tars: \n",tars)
 		for i:= range tars {
-			fmt.Println("ip: ",tars[i])
 			path := "/home/" + userEnvVar + "/HaGashash_Projects/" + *projectNamePtr + "/" + strings.Trim(tars[i],"'$'\n'")
-			fmt.Println("path: ",path)
 			createDirIfNotExist(path)
+			nmapVulnScan(strings.Trim(tars[i],"'$'\n'"))
 		}	  			
 }
 }
