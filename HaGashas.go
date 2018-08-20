@@ -9,6 +9,7 @@ import (
  	"strings"
  	"flag"
 	"os"
+	"log"
 )
 
 /* This function extracts attacker's IP address from ifconfig command output according to the interface that is given as a flag. */
@@ -51,7 +52,7 @@ func extractIPs(sliceOfTargets []string, nmapCmdOutput string) []string {
 
 /* This function gets empty slice of target IPs and attacker's IP address. 
 It identifies targets in his current subnet, saves those addresses in a slice of target and prints them. */
-func aliveHostsInSubnet(ipAddressesSlice []string, myIpAddress string) []string{
+func aliveHostsInSubnet(ipAddressesSlice []string, myIpAddress string) []string {
 	var dots, thirdDotIndex int
 	var dot string = "."
 	for i := range myIpAddress {
@@ -74,6 +75,7 @@ func aliveHostsInSubnet(ipAddressesSlice []string, myIpAddress string) []string{
 		fmt.Println(targets[k])
    	}
 	return targets
+	//return fmt.Println(targets)
 } 
 
 /* This function performs a nmap TCP/UDP/vulnerability scan on target IP. */
@@ -97,12 +99,12 @@ func nmapVulnScan(targetIP string) {
 	nmapUDPscanCmdOutput := string(nmapUDPscanCmdOut)
 	//Parse Those XMLs and put values in struct
 	v := Targets{}
-	err1 := xml.Unmarshal([]byte(nmapTCPscanCmdOut), &v)
+	err1 := xml.Unmarshal([]byte(nmapTCPscanCmdOutput), &v)
 	if err1 != nil {
 		fmt.Printf("error: %v", err1)
 		return
 	}
-	err2 := xml.Unmarshal([]byte(nmapUDPscanCmdOut), &v)
+	err2 := xml.Unmarshal([]byte(nmapUDPscanCmdOutput), &v)
 	if err2 != nil {
 		fmt.Printf("error: %v", err2)
 		return
@@ -111,12 +113,7 @@ func nmapVulnScan(targetIP string) {
 	fmt.Printf("Port: %q\n", v.Port)
 }
 
- 
-
-
-
-func main() {	
-	type address struct {
+type address struct {
 		addr string `xml:"addr,attr"`
 		addrtype string `xml:"addrtype,attr"`
 		vendor string `xml:"vendor,attr"`
@@ -132,7 +129,9 @@ func main() {
    		//os string
    		Port []port
 		//vulnerability string
-}
+} 
+
+func main() {	
 	interfacePtr := flag.String("interface", "nil", "Name of the interface to use (Required! Run ifconfig before HaGashash in order to choose one).")
 	//var myIpAddress string = whatIsMyIP(*interfacePtr) 
 	//fmt.Println(myIpAddress)
@@ -143,7 +142,7 @@ func main() {
 	nmap decoy*/
 	flag.Parse()
 	var targets []string
-	v := Targets{}	
+	//v := Targets{}	
 	//whatIsMyIP(*interfacePtr)
 	//fmt.Println(interfacePtr)
 	//targetsMap := make(map[int]string)	//use this as an argument in scanTargetsInSubnet(targetsMap)
@@ -165,20 +164,33 @@ func main() {
 		fmt.Println("\n[!] Starting to scan your subnet.\n")
 		ip := whatIsMyIP(*interfacePtr)
 		tars := aliveHostsInSubnet(targets, ip)
-		
+		/* binary, lookErr := exec.LookPath("mkdir")
+		//env := os.Environ()
+    		if lookErr != nil {
+        		panic(lookErr)
+    		} */
+		fmt.Println("tars: ",tars)
 		for i:= range tars {
-			mkdirCmd := exec.Command("bash", "-c", "sudo mkdir ~/Desktop/" + tars[i])
-    			mkdirCmdOut, err := mkdirCmd.Output()
+			path := "~/Desktop/"+tars[i]
+			err := os.MkdirAll(path,0711)
 			if err != nil {
+			 log.Println("Error creating directory")
+			 log.Println(err)
+			 return
+			}
+			//os.MkdirAll(path, os.ModePerm)
+			//args := []string{"mkdir", "/home/$USER/Desktop/"+tars[i]}
+			/* mkdir := "mkdir ~/Desktop/"+tars[i]	 
+			mkdirCmd := exec.Command("bash", "-c", mkdir)		
+    			mkdirOut, err := mkdirCmd.Output()
+    			if err != nil {
         			panic(err)
-    			}	
-			nmapVulnScan(tars[i])
-		}	
-		
-		/*start to scan subnet
-		fmt.Println("\n[!] Starting to scan your subnet (/24).\n\n")
-		whatIsMyIP(*interfacePtr)
-		scanTargetsInSubnet(ipAddress) */	
-	
+    			}
+			fmt.Println(string(mkdirOut)) 
+			execErr := syscall.Exec(binary, args, env)
+    			if execErr != nil {
+        			panic(execErr)
+    			} */
+		}	  			
 }
 }
