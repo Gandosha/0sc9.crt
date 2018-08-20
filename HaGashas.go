@@ -74,7 +74,6 @@ func aliveHostsInSubnet(ipAddressesSlice []string, myIpAddress string) []string 
 		fmt.Println(targets[k])
    	}
 	return targets
-	//return fmt.Println(targets)
 } 
 
 /* This function performs a nmap TCP/UDP/vulnerability scan on target IP. */
@@ -181,11 +180,6 @@ func main() {
 		fmt.Println("\n[!] Starting to scan your subnet.\n")
 		ip := whatIsMyIP(*interfacePtr)
 		tars := aliveHostsInSubnet(targets, ip)
-		/* binary, lookErr := exec.LookPath("mkdir")
-		//env := os.Environ()
-    		if lookErr != nil {
-        		panic(lookErr)
-    		} */
 		fmt.Println("tars: \n",tars)
 		for i:= range tars {
 			fmt.Println("ip: ",tars[i])
