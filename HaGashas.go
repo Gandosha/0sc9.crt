@@ -3,13 +3,25 @@ package main
 
 import (
 	"fmt"
-	"encoding/xml"
+	//"encoding/xml"
  	"io/ioutil"
  	"os/exec"
  	"strings"
  	"flag"
 	"os"
 )
+
+/* This function checks if all tools that are necessary for running properly, exist in system.
+The function gets a slice of necessary tools and print if they exist or not. 
+func checkIfNecessaryToolsAreExist() {
+    path, err := exec.LookPath("ls")
+    if err != nil {
+        fmt.Printf("didn't find 'ls' executable\n")
+    } else {
+        fmt.Printf("'ls' executable is in '%s'\n", path)
+    }
+}
+*/
 
 /* This function extracts attacker's IP address from ifconfig command output according to the interface that is given as a flag. */
 func whatIsMyIP(netInterface string) string{
@@ -77,26 +89,28 @@ func aliveHostsInSubnet(ipAddressesSlice []string, myIpAddress string) []string 
 } 
 
 /* This function performs a nmap TCP/UDP/vulnerability scan on target IP. */
-func nmapVulnScan(targetIP string) {
+func nmapVulnScan(targetIP string, xmlPath string) {
 //Work with struct target https://golang.org/pkg/encoding/xml/ (see "func Unmarshal")
 //Perform basic tcp/udp scans on all ports. Then take port numbers and append to a TCP and UDP slices and export in XML
 //Vuln scan those ports and export in XML
 	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for TCP ports.")
-	nmapTCPscanCmd := exec.Command("bash", "-c", "sudo nmap -sS -p- -T4 -Pn -vv -oX ~/Desktop/" + targetIP + "/TCPxml " + targetIP)
+	nmapTCPscanCmd := exec.Command("bash", "-c", "sudo nmap -sS -p- -T4 -Pn -vv -oX " + xmlPath + "/TCPxml")
     	nmapTCPscanCmdOut, err := nmapTCPscanCmd.Output()
 	if err != nil {
         	panic(err)
     	}	
 	nmapTCPscanCmdOutput := string(nmapTCPscanCmdOut)
 	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for UDP ports.")
-	nmapUDPscanCmd := exec.Command("bash", "-c", "sudo nmap -sU -p- -T4 -Pn -vv -oX ~/Desktop/" + targetIP + "/UDPxml " + targetIP)
+	nmapUDPscanCmd := exec.Command("bash", "-c", "sudo nmap -sU -p- -T4 -Pn -vv -oX " + xmlPath + "/UDPxml")
     	nmapUDPscanCmdOut, err := nmapUDPscanCmd.Output()
 	if err != nil {
         	panic(err)
     	}	
 	nmapUDPscanCmdOutput := string(nmapUDPscanCmdOut)
+	fmt.Println("nmapTCPscanCmdOutput:\n",nmapTCPscanCmdOutput)
+	fmt.Println("nmapUDPscanCmdOutput:\n",nmapUDPscanCmdOutput)
 	//Parse Those XMLs and put values in struct
-	v := Targets{}
+	/* v := Targets{}
 	err1 := xml.Unmarshal([]byte(nmapTCPscanCmdOutput), &v)
 	if err1 != nil {
 		fmt.Printf("error: %v", err1)
@@ -108,7 +122,7 @@ func nmapVulnScan(targetIP string) {
 		return
 	}
 	fmt.Printf("Address: %#v\n", v.Address)
-	fmt.Printf("Port: %q\n", v.Port)
+	fmt.Printf("Port: %q\n", v.Port) */
 }
 
 /* Create a directory if it does not exist. Otherwise do nothing. */
@@ -183,7 +197,7 @@ func main() {
 		for i:= range tars {
 			path := "/home/" + userEnvVar + "/HaGashash_Projects/" + *projectNamePtr + "/" + strings.Trim(tars[i],"'$'\n'")
 			createDirIfNotExist(path)
-			nmapVulnScan(strings.Trim(tars[i],"'$'\n'"))
+			nmapVulnScan(strings.Trim(tars[i],"'$'\n'"),path)
 		}	  			
 }
 }
