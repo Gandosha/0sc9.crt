@@ -164,6 +164,11 @@ func main() {
 		flag.PrintDefaults()
 		fmt.Println("\n")
 		os.Exit(1)
+	case *projectNamePtr == "nil":
+		fmt.Println("\n[!] Please specify a name for the project. (Ex. -project=example.com)\n\n")	
+		flag.PrintDefaults()
+		fmt.Println("\n")
+		os.Exit(1)
 	/*case *hostPtr == "nil":
 		//start to scan subnet
 		fmt.Println("\n[!] Starting to scan your subnet (/24).\n\n")
