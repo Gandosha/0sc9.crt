@@ -9,7 +9,6 @@ import (
  	"strings"
  	"flag"
 	"os"
-	"log"
 )
 
 /* This function extracts attacker's IP address from ifconfig command output according to the interface that is given as a flag. */
@@ -113,6 +112,17 @@ func nmapVulnScan(targetIP string) {
 	fmt.Printf("Port: %q\n", v.Port)
 }
 
+/* Create a directory if it does not exist. Otherwise do nothing. */
+func createDirIfNotExist(dir string) {
+      if _, err := os.Stat(dir); os.IsNotExist(err) {
+              err = os.MkdirAll(dir, 0755)
+              if err != nil {
+                      panic(err)
+              }
+      }
+}
+
+
 type address struct {
 		addr string `xml:"addr,attr"`
 		addrtype string `xml:"addrtype,attr"`
@@ -132,6 +142,8 @@ type address struct {
 } 
 
 func main() {	
+	userEnvVar := os.Getenv("SUDO_USER")
+	projectNamePtr := flag.String("project", "nil", "Name of the project. (Required! It will create project's folder in /home/" + userEnvVar + "/HaGashash_Temp/).")
 	interfacePtr := flag.String("interface", "nil", "Name of the interface to use (Required! Run ifconfig before HaGashash in order to choose one).")
 	//var myIpAddress string = whatIsMyIP(*interfacePtr) 
 	//fmt.Println(myIpAddress)
@@ -169,28 +181,12 @@ func main() {
     		if lookErr != nil {
         		panic(lookErr)
     		} */
-		fmt.Println("tars: ",tars)
+		fmt.Println("tars: \n",tars)
 		for i:= range tars {
-			path := "~/Desktop/"+tars[i]
-			err := os.MkdirAll(path,0711)
-			if err != nil {
-			 log.Println("Error creating directory")
-			 log.Println(err)
-			 return
-			}
-			//os.MkdirAll(path, os.ModePerm)
-			//args := []string{"mkdir", "/home/$USER/Desktop/"+tars[i]}
-			/* mkdir := "mkdir ~/Desktop/"+tars[i]	 
-			mkdirCmd := exec.Command("bash", "-c", mkdir)		
-    			mkdirOut, err := mkdirCmd.Output()
-    			if err != nil {
-        			panic(err)
-    			}
-			fmt.Println(string(mkdirOut)) 
-			execErr := syscall.Exec(binary, args, env)
-    			if execErr != nil {
-        			panic(execErr)
-    			} */
+			fmt.Println("ip: ",tars[i])
+			path := "/home/" + userEnvVar + "/HaGashash_Projects/" + *projectNamePtr + "/" + strings.Trim(tars[i],"'$'\n'")
+			fmt.Println("path: ",path)
+			createDirIfNotExist(path)
 		}	  			
 }
 }
