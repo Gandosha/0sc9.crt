@@ -94,7 +94,6 @@ func nmapVulnScan(targetIP string, xmlPath string) {
 //Perform basic tcp/udp scans on all ports. Then take port numbers and append to a TCP and UDP slices and export in XML
 //Vuln scan those ports and export in XML
 	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for TCP ports.")
-	//nmapTCPscanCmd := exec.Command("bash", "-c", "nmap -sS -p- -T4 -Pn -vv -oX" + xmlPath + "/TCPxml")
 	nmapCmd := exec.Command("bash", "-c", "nmap -sS -p- -T4 -Pn -vv -oX " + xmlPath + "/TCPxml " + targetIP)
     	err := nmapCmd.Start()
     	if err != nil {
@@ -104,9 +103,18 @@ func nmapVulnScan(targetIP string, xmlPath string) {
 	if err != nil {
         	panic(err)
     	}
-    	fmt.Println(" ")
-	//nmapOutput := string(nmapOut)
-	//fmt.Println("nmapOutput:\n\n",nmapOutput)
+    	fmt.Println("\n")
+	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for UDP ports.")
+	nmapCmd = exec.Command("bash", "-c", "nmap -sU -p- -T4 -Pn -vv -oX " + xmlPath + "/UDPxml " + targetIP)
+    	err = nmapCmd.Start()
+    	if err != nil {
+        	panic(err)
+    	}
+	err = nmapCmd.Wait()	
+	if err != nil {
+        	panic(err)
+    	}
+    	fmt.Println("\n")
 }
 
 /* This function creates a directory if it does not exist. Otherwise do nothing. */
