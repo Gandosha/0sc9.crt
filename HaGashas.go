@@ -100,8 +100,9 @@ func nmapVulnScan(targetIP string, xmlPath string) {
 	if err != nil {
         	panic(err)
     	}
-    	fmt.Println("\n")
-	//Unmarshal TCP and put it in targets struct
+    	//fmt.Println("\n")
+	//call xmlParser
+	parseXML(xmlPath + "/TCPxml")
 	//Vuln scan those ports
 	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for UDP ports.")
 	nmapCmd = exec.Command("bash", "-c", "nmap -sU -p- -T4 -Pn -vv -oX " + xmlPath + "/UDPxml " + targetIP)
@@ -116,6 +117,37 @@ func nmapVulnScan(targetIP string, xmlPath string) {
     	fmt.Println("\n")
 }
 
+/* This function parses the TCPxml and UDPxml files that are created in nmapVulnScan(). */
+func parseXML(xmlPath string) {
+	// Open our xmlFile
+	xmlFile, err := os.Open(xmlPath + "/TCPxml")
+	// if we os.Open returns an error then handle it
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println("Successfully Opened " + xmlPath + "/TCPxml")
+	// defer the closing of our xmlFile so that we can parse it later on
+	defer xmlFile.Close()
+
+	// read our opened xmlFile as a byte array.
+	byteValue, _ := ioutil.ReadAll(xmlFile)
+
+	// we initialize our Targets array
+	var targets Targets
+	// we unmarshal our byteArray which contains our
+	// xmlFiles content into 'targets' which we defined above
+	xml.Unmarshal(byteValue, &targets)
+
+	// we iterate through every user within our users array and
+	// print out the user Type, their name, and their facebook url
+	// as just an example
+	for i := 0; i < len(targets.Targets); i++ {
+		fmt.Println("Address: " + targets.Targets[i].Address)
+		fmt.Println("Port: " + targets.Targets[i].Port)
+	}
+}
+
 /* This function creates a directory if it does not exist. Otherwise do nothing. */
 func createDirIfNotExist(dir string) {
       if _, err := os.Stat(dir); os.IsNotExist(err) {
@@ -126,19 +158,18 @@ func createDirIfNotExist(dir string) {
       }
 }
 
-
 type address struct {
 		addr string `xml:"addr,attr"`
 		addrtype string `xml:"addrtype,attr"`
 		vendor string `xml:"vendor,attr"`
 }
-	type port struct {
+type port struct {
 		portid int `xml:"portid,attr"`
 		protocol string `xml:"protocol,attr"`
 		state string `xml:"state,attr"`
 		
 }
-	type Targets struct {
+type Targets struct {
 		Address []address
    		//os string
    		Port []port
@@ -189,6 +220,6 @@ func main() {
 			path := "/home/" + userEnvVar + "/HaGashash_Projects/" + *projectNamePtr + "/" + strings.Trim(tars[i],"'$'\n'")
 			createDirIfNotExist(path)
 			nmapVulnScan(strings.Trim(tars[i],"'$'\n'"),path)	
-		}	  			
-}
+			}	  			
+		}
 }
