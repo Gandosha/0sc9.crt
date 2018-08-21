@@ -94,38 +94,22 @@ func nmapVulnScan(targetIP string, xmlPath string) {
 //Perform basic tcp/udp scans on all ports. Then take port numbers and append to a TCP and UDP slices and export in XML
 //Vuln scan those ports and export in XML
 	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for TCP ports.")
-	nmapTCPscanCmd := exec.Command("bash", "-c", "sudo nmap -sS -p- -T4 -Pn -vv -oX " + xmlPath + "/TCPxml")
-    	nmapTCPscanCmdOut, err := nmapTCPscanCmd.Output()
+	//nmapTCPscanCmd := exec.Command("bash", "-c", "nmap -sS -p- -T4 -Pn -vv -oX" + xmlPath + "/TCPxml")
+	nmapCmd := exec.Command("bash", "-c", "nmap -sS -p- -T4 -Pn -vv -oX " + xmlPath + "/TCPxml " + targetIP)
+    	err := nmapCmd.Start()
+    	if err != nil {
+        	panic(err)
+    	}
+	err = nmapCmd.Wait()	
 	if err != nil {
         	panic(err)
-    	}	
-	nmapTCPscanCmdOutput := string(nmapTCPscanCmdOut)
-	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for UDP ports.")
-	nmapUDPscanCmd := exec.Command("bash", "-c", "sudo nmap -sU -p- -T4 -Pn -vv -oX " + xmlPath + "/UDPxml")
-    	nmapUDPscanCmdOut, err := nmapUDPscanCmd.Output()
-	if err != nil {
-        	panic(err)
-    	}	
-	nmapUDPscanCmdOutput := string(nmapUDPscanCmdOut)
-	fmt.Println("nmapTCPscanCmdOutput:\n",nmapTCPscanCmdOutput)
-	fmt.Println("nmapUDPscanCmdOutput:\n",nmapUDPscanCmdOutput)
-	//Parse Those XMLs and put values in struct
-	/* v := Targets{}
-	err1 := xml.Unmarshal([]byte(nmapTCPscanCmdOutput), &v)
-	if err1 != nil {
-		fmt.Printf("error: %v", err1)
-		return
-	}
-	err2 := xml.Unmarshal([]byte(nmapUDPscanCmdOutput), &v)
-	if err2 != nil {
-		fmt.Printf("error: %v", err2)
-		return
-	}
-	fmt.Printf("Address: %#v\n", v.Address)
-	fmt.Printf("Port: %q\n", v.Port) */
+    	}
+    	fmt.Println(" ")
+	//nmapOutput := string(nmapOut)
+	//fmt.Println("nmapOutput:\n\n",nmapOutput)
 }
 
-/* Create a directory if it does not exist. Otherwise do nothing. */
+/* This function creates a directory if it does not exist. Otherwise do nothing. */
 func createDirIfNotExist(dir string) {
       if _, err := os.Stat(dir); os.IsNotExist(err) {
               err = os.MkdirAll(dir, 0755)
@@ -197,7 +181,7 @@ func main() {
 		for i:= range tars {
 			path := "/home/" + userEnvVar + "/HaGashash_Projects/" + *projectNamePtr + "/" + strings.Trim(tars[i],"'$'\n'")
 			createDirIfNotExist(path)
-			nmapVulnScan(strings.Trim(tars[i],"'$'\n'"),path)
+			nmapVulnScan(strings.Trim(tars[i],"'$'\n'"),path)	
 		}	  			
 }
 }
