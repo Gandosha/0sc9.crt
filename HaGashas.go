@@ -3,7 +3,7 @@ package main
 
 import (
 	"fmt"
-	//"encoding/xml"
+	"encoding/xml"
  	"io/ioutil"
  	"os/exec"
  	"strings"
@@ -90,9 +90,6 @@ func aliveHostsInSubnet(ipAddressesSlice []string, myIpAddress string) []string 
 
 /* This function performs a nmap TCP/UDP/vulnerability scan on target IP. */
 func nmapVulnScan(targetIP string, xmlPath string) {
-//Work with struct target https://golang.org/pkg/encoding/xml/ (see "func Unmarshal")
-//Perform basic tcp/udp scans on all ports. Then take port numbers and append to a TCP and UDP slices and export in XML
-//Vuln scan those ports and export in XML
 	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for TCP ports.")
 	nmapCmd := exec.Command("bash", "-c", "nmap -sS -p- -T4 -Pn -vv -oX " + xmlPath + "/TCPxml " + targetIP)
     	err := nmapCmd.Start()
@@ -104,6 +101,8 @@ func nmapVulnScan(targetIP string, xmlPath string) {
         	panic(err)
     	}
     	fmt.Println("\n")
+	//Unmarshal TCP and put it in targets struct
+	//Vuln scan those ports
 	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for UDP ports.")
 	nmapCmd = exec.Command("bash", "-c", "nmap -sU -p- -T4 -Pn -vv -oX " + xmlPath + "/UDPxml " + targetIP)
     	err = nmapCmd.Start()
