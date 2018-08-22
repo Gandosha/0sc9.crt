@@ -119,6 +119,26 @@ func nmapVulnScan(targetIP string, xmlPath string) {
 
 /* This function parses the TCPxml and UDPxml files that are created in nmapVulnScan(). */
 func parseXML(xmlPath string) {
+	type Targets struct {
+		XMLName xml.Name `xml:"targets"`
+		Address []Addresses 
+   		//os string
+   		Port []Ports 
+		//vulnerability string
+	}
+	type Addresses struct {
+		XMLName xml.Name `xml:"addresses"`
+		Address string `xml:"addr,attr"`
+		Addresstype string `xml:"addrtype,attr"`
+		Vendor string `xml:"vendor,attr"`
+	}
+	type Ports struct {
+		XMLName xml.Name `xml:"ports"`
+		Portid int `xml:"portid,attr"`
+		Protocol string `xml:"protocol,attr"`
+		State string `xml:"state,attr"`
+		
+	} 
 	// Open our xmlFile
 	xmlFile, err := os.Open(xmlPath + "/TCPxml")
 	// if we os.Open returns an error then handle it
@@ -134,18 +154,19 @@ func parseXML(xmlPath string) {
 	byteValue, _ := ioutil.ReadAll(xmlFile)
 
 	// we initialize our Targets array
-	var targets Targets
+	var targetim Targets
 	// we unmarshal our byteArray which contains our
 	// xmlFiles content into 'targets' which we defined above
-	xml.Unmarshal(byteValue, &targets)
-
+	xml.Unmarshal(byteValue, &targetim)
+	//fmt.Println(targetsArray)
 	// we iterate through every user within our users array and
 	// print out the user Type, their name, and their facebook url
 	// as just an example
-	for i := 0; i < len(targets.Targets); i++ {
-		fmt.Println("Address: " + targets.Targets[i].Address)
-		fmt.Println("Port: " + targets.Targets[i].Port)
-	}
+	fmt.Println(targetim.Address)
+	/*for i := 0; i < len(targetim.Targets); i++ {
+		fmt.Println("Address: " + targetim.Targets[i].Address)
+		fmt.Println("Port: " + targetim.Targets[i].Port)
+	} */
 }
 
 /* This function creates a directory if it does not exist. Otherwise do nothing. */
@@ -158,23 +179,26 @@ func createDirIfNotExist(dir string) {
       }
 }
 
-type address struct {
-		addr string `xml:"addr,attr"`
-		addrtype string `xml:"addrtype,attr"`
-		vendor string `xml:"vendor,attr"`
+/*type address struct {
+		XMLName xml.Name `xml:"address"`
+		Addr string `xml:"addr,attr"`
+		Addrtype string `xml:"addrtype,attr"`
+		Vendor string `xml:"vendor,attr"`
 }
 type port struct {
-		portid int `xml:"portid,attr"`
-		protocol string `xml:"protocol,attr"`
-		state string `xml:"state,attr"`
+		XMLName xml.Name `xml:"port"`
+		Portid int `xml:"portid,attr"`
+		Protocol string `xml:"protocol,attr"`
+		State string `xml:"state,attr"`
 		
 }
 type Targets struct {
+		XMLName xml.Name `xml:"Targets"`
 		Address []address
    		//os string
    		Port []port
 		//vulnerability string
-} 
+} */
 
 func main() {	
 	userEnvVar := os.Getenv("SUDO_USER")
@@ -214,12 +238,15 @@ func main() {
 	default:
 		//start to scan subnet
 		fmt.Println("\n[!] Starting to scan your subnet.\n")
+		var targetim Targets
 		ip := whatIsMyIP(*interfacePtr)
 		tars := aliveHostsInSubnet(targets, ip)
 		for i:= range tars {
 			path := "/home/" + userEnvVar + "/HaGashash_Projects/" + *projectNamePtr + "/" + strings.Trim(tars[i],"'$'\n'")
 			createDirIfNotExist(path)
-			nmapVulnScan(strings.Trim(tars[i],"'$'\n'"),path)	
-			}	  			
+			nmapVulnScan(strings.Trim(tars[i],"'$'\n'"),path)
+			parseXML(path)						  			
 		}
+}
+		
 }
