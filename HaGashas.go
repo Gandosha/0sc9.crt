@@ -21,9 +21,9 @@ func checkIfNecessaryToolsAreExist() {
         fmt.Printf("'ls' executable is in '%s'\n", path)
     }
 }
-*/
 
-/* This function extracts attacker's IP address from ifconfig command output according to the interface that is given as a flag. */
+
+/* This function extracts attacker's IP address from ifconfig command output according to the interface that is given as a flag.
 func whatIsMyIP(netInterface string) string{
 	ifconfigCmd := exec.Command("ifconfig")
 	ifconfigIn, _ := ifconfigCmd.StdinPipe()
@@ -41,10 +41,10 @@ func whatIsMyIP(netInterface string) string{
 	spaceIndex := strings.Index(ifconfigTrimmed2, " ")
 	ipAddress := ifconfigTrimmed2[:spaceIndex]	
 	return ipAddress
-}
+} */
 
 /* This recursive function extracts IP addresses from nmap -sn output. The function gets command's output and a slice of target IPs. 
-It returns slice of target IPs updated (appended) */
+It returns slice of target IPs updated (appended) *
 func extractIPs(sliceOfTargets []string, nmapCmdOutput string) []string {
 	var forWord string = "for"
 	forWordIndex := strings.Index(nmapCmdOutput, forWord)
@@ -62,7 +62,7 @@ func extractIPs(sliceOfTargets []string, nmapCmdOutput string) []string {
 
 
 /* This function gets empty slice of target IPs and attacker's IP address. 
-It identifies targets in his current subnet, saves those addresses in a slice of target and prints them. */
+It identifies targets in his current subnet, saves those addresses in a slice of target and prints them. *
 func aliveHostsInSubnet(ipAddressesSlice []string, myIpAddress string) []string {
 	var dots, thirdDotIndex int
 	var dot string = "."
@@ -86,9 +86,9 @@ func aliveHostsInSubnet(ipAddressesSlice []string, myIpAddress string) []string 
 		fmt.Println(targets[k])
    	}
 	return targets
-} 
+} */
 
-/* This function performs a nmap TCP/UDP/vulnerability scan on target IP. */
+/* This function performs a nmap TCP/UDP/vulnerability scan on target IP. 
 func nmapVulnScan(targetIP string, xmlPath string) {
 	fmt.Println("\n\n[!] Starting to scan " + targetIP + " for TCP ports.")
 	nmapCmd := exec.Command("bash", "-c", "nmap -sS -p- -T4 -Pn -vv -oX " + xmlPath + "/TCPxml " + targetIP)
@@ -117,13 +117,13 @@ func nmapVulnScan(targetIP string, xmlPath string) {
     	fmt.Println("\n")
 }
 
-/* This function parses the TCPxml and UDPxml files that are created in nmapVulnScan(). */
+/* This function parses the TCPxml and UDPxml files that are created in nmapVulnScan(). 
 func parseXML(xmlPath string) {
 	type Targets struct {
 		XMLName xml.Name `xml:"targets"`
-		Address []Addresses 
+		Address []Addresses `xml:"addresses"`
    		//os string
-   		Port []Ports 
+   		Port []Ports `xml:"ports"`
 		//vulnerability string
 	}
 	type Addresses struct {
@@ -169,7 +169,7 @@ func parseXML(xmlPath string) {
 	} */
 }
 
-/* This function creates a directory if it does not exist. Otherwise do nothing. */
+/* This function creates a directory if it does not exist. Otherwise do nothing. 
 func createDirIfNotExist(dir string) {
       if _, err := os.Stat(dir); os.IsNotExist(err) {
               err = os.MkdirAll(dir, 0755)
