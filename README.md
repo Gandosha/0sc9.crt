@@ -3,7 +3,7 @@ Prep
 ----------------------------------------------------------------------------------------------------------------------
 * **Basic infra** - https://github.com/rapid7/metasploitable3
 * **Basic web** - https://www.owasp.org/index.php/OWASP_Broken_Web_Applications_Project
-* **OSCP like VMs** - https://www.vulnhub.com/
+* **OSCP like VMs** - https://www.abatchy.com/2017/02/oscp-like-vulnhub-vms   https://www.vulnhub.com/
 
 ----------------------------------------------------------------------------------------------------------------------
 Enumeration
