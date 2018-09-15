@@ -380,6 +380,7 @@ SQL Injection
 * /*/bWAPP/sqli_5.php?title=The+Dark+Knight+Rises'-if(length(database())%3d'5',sleep(5),1)%23&action=go
 
 **Cheat Sheets:**
+* https://www.netsparker.com/blog/web-security/sql-injection-cheat-sheet/
 * https://websec.ca/kb/sql_injection#MSSQL_Default_Databases
 * http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet
 * https://github.com/codingo/OSCP-2/blob/master/Documents/SQL%20Injection%20Cheatsheet.md
