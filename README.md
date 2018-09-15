@@ -376,7 +376,7 @@ SQL Injection
 **Examples**
 * Boolean Blind SQL Injection - https://www.youtube.com/watch?v=4LM_EIehbsU
 * Time Based SQL Injection - https://www.youtube.com/watch?v=mphLv1ZCMf8 
-* Error Based + upload shell https://www.youtube.com/watch?v=vPgMi7R9tvs
+* Error Based + upload shell https://www.youtube.com/watch?v=vPgMi7R9tvs  /  https://www.youtube.com/watch?v=0xrDZi8Qq0A
 * /*/bWAPP/sqli_5.php?title=The+Dark+Knight+Rises'-if(length(database())%3d'5',sleep(5),1)%23&action=go
 
 **Cheat Sheets:**
