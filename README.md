@@ -203,6 +203,8 @@ https://www.digitalocean.com/community/tutorials/ssh-essentials-working-with-ssh
 ----------------------------------------------------------------------------------------------------------------------
 Payload generation
 ----------------------------------------------------------------------------------------------------------------------
+**http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet**
+
  **List payloads**
 
 msfvenom -l
