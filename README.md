@@ -38,31 +38,11 @@ Enumeration
 
 **3. Any web port(s) for further enumeration?**
 ----------------------------------------------------------------------------------------------------------------------
-* nikto -Display V -host <IP_ADDRESS> -port <PORTS_NUMS> -Tuning x 6 -o ~/Desktop/<IP_ADDRESS>/Nikto_Output.html -Format html
+* Fuzz directories (HTTP/HTTPS) using ZAP  (/usr/share/secLists/Discovery folder that has some great wordlists for this)
 
-* **Nikto CMDs at https://cirt.net/nikto2-docs/options.html#id2741238**
-   
-* Fuzz directories using ZAP  (/usr/share/secLists/Discovery folder that has some great wordlists for this)
-
-* fimap -u <TARGET>     (If you see any LFI/RFI vulnerability posted by Nikto)
-
-
-
-**4. Are there any exploits available publicly from the services discovered from Step 2?**
+**4. Manual Poking for Web Pages**
 ----------------------------------------------------------------------------------------------------------------------
-* searchsploit <service name>
-
-* http://www.securityfocus.com/vulnerabilities
-
-Copy exploit to local dir: searchsploit -m <ID>
-   
-* **Precompiled windows exploits** - https://github.com/abatchy17/WindowsExploits
-* **Windows kernel exploits** - https://github.com/SecWiki/windows-kernel-exploits
-* **Linux kernel exploits** - https://github.com/SecWiki/linux-kernel-exploits
-
-**5. Manual Poking for Web Pages**
-----------------------------------------------------------------------------------------------------------------------
-Check the Page Source, Inspect elements, view cookies, tamper data, use curl/wget
+Check the Page Source, Inspect elements, view cookies, tamper data, use curl/wget (Use ZAP ;) )
 
     Google alien terms!
     Anything sensitive there?
@@ -84,6 +64,19 @@ Check for Input Validation in forms (like: 1′ or 1=1 limit 1;#   AND   1′ or
         Used to find command execution vulnerabilities.
     ../
         Directory Traversal Vulnerabilities.
+
+
+**5. Are there any exploits available publicly from the services discovered from Step 2?**
+----------------------------------------------------------------------------------------------------------------------
+* searchsploit <service name>
+
+* http://www.securityfocus.com/vulnerabilities
+
+Copy exploit to local dir: searchsploit -m <ID>
+   
+* **Precompiled windows exploits** - https://github.com/abatchy17/WindowsExploits
+* **Windows kernel exploits** - https://github.com/SecWiki/windows-kernel-exploits
+* **Linux kernel exploits** - https://github.com/SecWiki/linux-kernel-exploits
 
 **6. Are there any NETBIOS, SMB, RPC ports discovered from Step 1?**
 ----------------------------------------------------------------------------------------------------------------------
