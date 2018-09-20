@@ -66,6 +66,9 @@ Check for Input Validation in forms (like: 1′ or 1=1 limit 1;#   AND   1′ or
         Used to find command execution vulnerabilities.
     ../
         Directory Traversal Vulnerabilities.
+        
+**Wordpress?**
+wpscan --url <URL> --enumerate uap
 
 
 **5. Are there any exploits available publicly from the services discovered from Step 2?**
