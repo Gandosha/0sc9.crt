@@ -9,6 +9,7 @@ Prep
 Enumeration
 ----------------------------------------------------------------------------------------------------------------------
 **OPEN UP Wireshark and LISTEN**
+* Decrypting TLS Browser Traffic With Wireshark - https://jimshaver.net/2015/02/11/decrypting-tls-browser-traffic-with-wireshark-the-easy-way/
 
 **1. Nmap basic scan**
 ----------------------------------------------------------------------------------------------------------------------
