@@ -353,6 +353,10 @@ This is a great tool for once again checking a lot of standard things like file 
 http://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
 Not so much a script as a resource, g0tmi1k’s blog post here has led to so many privilege escalations on Linux system’s it’s not funny. Would definitely recommend trying out everything on this post for enumerating systems. 
 
+*find command cheat sheets:
+https://bencane.com/2012/07/22/cheat-sheet-21-useful-find-commands/
+https://www.hackersgarage.com/find-linux-command-cheat-sheet.html
+
 ----------------------------------------------------------------------------------------------------------------------
 Transferring files
 ----------------------------------------------------------------------------------------------------------------------
