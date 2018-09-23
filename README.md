@@ -356,6 +356,7 @@ Not so much a script as a resource, g0tmi1k’s blog post here has led to so man
 *find command cheat sheets:
 https://bencane.com/2012/07/22/cheat-sheet-21-useful-find-commands/
 https://www.hackersgarage.com/find-linux-command-cheat-sheet.html
+Ex. find -name ".bash_history" -exec cat {} \;
 
 ----------------------------------------------------------------------------------------------------------------------
 Transferring files
