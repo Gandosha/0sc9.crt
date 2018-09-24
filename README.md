@@ -4,7 +4,7 @@ Prep
 * **Basic infra** - https://github.com/rapid7/metasploitable3
 * **Basic web** - https://www.owasp.org/index.php/OWASP_Broken_Web_Applications_Project
 * **OSCP like VMs** - https://www.abatchy.com/2017/02/oscp-like-vulnhub-vms   /  https://medium.com/@andr3w_hilton/oscp-training-vms-hosted-on-vulnhub-com-22fa061bf6a1
-
+* **Hack The Box** - https://www.hackthebox.eu/
 ----------------------------------------------------------------------------------------------------------------------
 Enumeration
 ----------------------------------------------------------------------------------------------------------------------
